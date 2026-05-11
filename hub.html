@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI for Generic Pharma — Document Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --navy-deep: #07162A;
+    --teal: #008C9E;
+    --orange: #E87A33;
+    --paper: #f5f1ea;
+    --paper-warm: #ede7db;
+    --accent: #b8451e;
+    --gold: #c9a04a;
+    --bg: #F5F7FA;
+    --surface: #FFFFFF;
+    --border: #E2E6EC;
+    --text: #1A1A1A;
+    --text-muted: #4A5568;
+    --text-faint: #8B95A3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(232, 122, 51, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 90% 90%, rgba(0, 140, 158, 0.04) 0%, transparent 40%);
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 40px 60px;
+  }
+
+  /* ===== HEADER ===== */
+  .hub-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .hub-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--orange);
+  }
+
+  .hub-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+
+  .hub-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    margin-bottom: 18px;
+  }
+
+  .hub-title em {
+    font-style: italic;
+    color: var(--orange);
+    font-weight: 400;
+  }
+
+  .hub-deck {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  .hub-meta {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .hub-meta span {
+    position: relative;
+  }
+
+  .hub-meta span + span::before {
+    content: '·';
+    position: absolute;
+    left: -17px;
+    color: var(--orange);
+  }
+
+  /* ===== DOC CARDS ===== */
+  .docs {
+    display: grid;
+    gap: 24px;
+  }
+
+  .doc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 36px;
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 30px;
+    align-items: center;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doc-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--accent-color, var(--orange));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+  }
+
+  .doc-card:hover {
+    border-color: var(--accent-color, var(--orange));
+    box-shadow: 0 8px 24px rgba(11, 31, 58, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .doc-card:hover::before {
+    transform: scaleY(1);
+  }
+
+  .doc-card.deck { --accent-color: var(--teal); }
+  .doc-card.brief { --accent-color: var(--accent); }
+  .doc-card.thoughts { --accent-color: var(--gold); }
+
+  .doc-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 4.2rem;
+    line-height: 0.9;
+    color: var(--accent-color);
+    letter-spacing: -0.04em;
+  }
+
+  .doc-body h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .doc-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .doc-desc {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+
+  .doc-meta {
+    display: flex;
+    gap: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .doc-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .doc-meta span::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  .doc-cta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    padding: 12px 18px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .doc-card:hover .doc-cta {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+  }
+
+  .doc-cta .arrow {
+    transition: transform 0.2s;
+  }
+
+  .doc-card:hover .doc-cta .arrow {
+    transform: translateX(4px);
+  }
+
+  /* ===== FOOTER NOTE ===== */
+  .hub-footer {
+    margin-top: 60px;
+    padding: 30px 36px;
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .hub-footer .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--paper-warm);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    flex-shrink: 0;
+  }
+
+  .hub-footer p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .hub-footer strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .container { padding: 50px 20px 40px; }
+    .doc-card {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 24px;
+    }
+    .doc-num { font-size: 3rem; }
+    .doc-cta { justify-self: start; }
+    .hub-meta { flex-direction: column; gap: 8px; }
+    .hub-meta span + span::before { display: none; }
+    .hub-footer { flex-direction: column; text-align: center; }
+  }
+
+  /* fade in */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hub-header, .doc-card, .hub-footer {
+    animation: rise 0.6s ease-out backwards;
+  }
+
+  .doc-card:nth-child(1) { animation-delay: 0.15s; }
+  .doc-card:nth-child(2) { animation-delay: 0.25s; }
+  .doc-card:nth-child(3) { animation-delay: 0.35s; }
+  .hub-footer { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ===== HEADER ===== -->
+  <header class="hub-header">
+    <div class="hub-kicker">Document Hub</div>
+    <h1 class="hub-title">Agentic AI for <em>Small Generic Pharma</em></h1>
+    <p class="hub-deck">Three documents, one workspace. The strategy deck, the founder's brief, and the closing thoughts — everything in one place.</p>
+    <div class="hub-meta">
+      <span>New Jersey</span>
+      <span>2026</span>
+      <span>3 Documents</span>
+    </div>
+  </header>
+
+  <!-- ===== DOC CARDS ===== -->
+  <div class="docs">
+
+    <a class="doc-card deck" href="Agentic_AI_Generic_Pharma_Strategy.html">
+      <div class="doc-num">01</div>
+      <div class="doc-body">
+        <div class="doc-kicker">Strategy Deck</div>
+        <h3>Agentic AI for Small Generic Pharma</h3>
+        <p class="doc-desc">The full 21-slide strategy and build plan. Executive summary, market sizing, use cases, architecture, NJ target accounts, competitive landscape, three-year roadmap, and the funding ask.</p>
+        <div class="doc-meta">
+          <span>21 Slides</span>
+          <span>Strategy + Build Plan</span>
+          <span>Speaker Notes</span>
+        </div>
+      </div>
+      <div class="doc-cta">
+        Open <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a class="doc-card brief" href="agentic_ai_generics_strategic_brief.html">
+      <div class="doc-num">02</div>
+      <div class="doc-body">
+        <div class="doc-kicker">Strategic Brief</div>
+        <h3>A Founder's Guide to the Wedge</h3>
+        <p class="doc-desc">Eleven-section brief on use cases, market gaps, the patent/IP intelligence wedge, six-month execution plan, risks, the advisor multiplier, and action items for the week ahead.</p>
+        <div class="doc-meta">
+          <span>11 Sections</span>
+          <span>Wedge Strategy</span>
+          <span>6-Month Plan</span>
+        </div>
+      </div>
+      <div class="doc-cta">
+        Open <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a class="doc-card thoughts" href="agentic_ai_generics_final_thoughts.html">
+      <div class="doc-num">03</div>
+      <div class="doc-body">
+        <div class="doc-kicker">Final Thoughts</div>
+        <h3>A Closing Letter</h3>
+        <p class="doc-desc">The brief distilled into a single conversation — three truths to remember, the now &amp; then strategic compass, and the throughline that ties everything together.</p>
+        <div class="doc-meta">
+          <span>Closing Letter</span>
+          <span>Three Truths</span>
+          <span>Compass</span>
+        </div>
+      </div>
+      <div class="doc-cta">
+        Open <span class="arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ===== FOOTER NOTE ===== -->
+  <div class="hub-footer">
+    <div class="icon">i</div>
+    <p>The three documents are <strong>complementary, not redundant</strong>. The deck is for pitching, the brief is for thinking, and the final thoughts are for remembering what matters when the noise starts. Read in order, or jump straight to whichever you need.</p>
+  </div>
+
+</div>
+
+</body>
+</html>

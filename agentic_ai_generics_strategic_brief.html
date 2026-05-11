@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI for Small Generics Pharma — Strategic Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1814;
+    --ink-soft: #3d3a34;
+    --ink-muted: #6b6660;
+    --paper: #f5f1ea;
+    --paper-warm: #ede7db;
+    --accent: #b8451e;
+    --accent-deep: #7a2d12;
+    --gold: #c9a04a;
+    --line: #2a2520;
+    --line-soft: #d4cdbf;
+    --success: #4a6b3a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter Tight', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 16px;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(184, 69, 30, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 85% 70%, rgba(201, 160, 74, 0.05) 0%, transparent 40%);
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ============ MASTHEAD ============ */
+  .masthead {
+    border-bottom: 2px solid var(--line);
+    padding: 60px 0 40px;
+    position: relative;
+  }
+
+  .masthead-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 30px;
+  }
+
+  .masthead-meta::before,
+  .masthead-meta::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line-soft);
+  }
+
+  .masthead-meta span {
+    padding: 0 20px;
+  }
+
+  .title-block {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+  }
+
+  h1.title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 20px;
+    font-variation-settings: "opsz" 144;
+  }
+
+  h1.title em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.3rem;
+    color: var(--ink-soft);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .byline {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--line-soft);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .byline-item .label {
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+    font-size: 10px;
+  }
+
+  .byline-item .value {
+    color: var(--ink);
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 500;
+  }
+
+  /* ============ TOC ============ */
+  .toc {
+    background: var(--paper-warm);
+    border: 1px solid var(--line-soft);
+    padding: 35px 40px;
+    margin: 60px 0;
+    position: relative;
+  }
+
+  .toc::before {
+    content: 'CONTENTS';
+    position: absolute;
+    top: -10px;
+    left: 30px;
+    background: var(--paper);
+    padding: 0 15px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+  }
+
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+    columns: 2;
+    column-gap: 50px;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    padding: 8px 0;
+    break-inside: avoid;
+    border-bottom: 1px dotted var(--line-soft);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .toc a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    flex: 1;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover {
+    color: var(--accent);
+  }
+
+  /* ============ SECTIONS ============ */
+  section {
+    padding: 70px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  section:last-child {
+    border-bottom: none;
+  }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 30px;
+    align-items: baseline;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .section-number {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 3.5rem;
+    color: var(--accent);
+    line-height: 1;
+    font-style: italic;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 2.2rem;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  .section-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* ============ PROSE ============ */
+  p {
+    margin-bottom: 18px;
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 75ch;
+  }
+
+  p.lead {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 400;
+    margin-bottom: 30px;
+    max-width: 70ch;
+  }
+
+  p.lead::first-letter {
+    font-size: 3.5rem;
+    float: left;
+    line-height: 0.85;
+    margin: 8px 12px 0 0;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: 'Fraunces', serif;
+  }
+
+  strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  em {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* ============ CALLOUTS ============ */
+  .callout {
+    background: linear-gradient(135deg, #fdf8ef 0%, #f5ead4 100%);
+    border-left: 3px solid var(--accent);
+    padding: 28px 32px;
+    margin: 30px 0;
+    position: relative;
+  }
+
+  .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .callout p {
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout.warning {
+    background: linear-gradient(135deg, #fdf0e8 0%, #f5dac4 100%);
+    border-left-color: var(--accent-deep);
+  }
+
+  .callout.warning .callout-label {
+    color: var(--accent-deep);
+  }
+
+  /* ============ TIER GRID ============ */
+  .tiers {
+    display: grid;
+    gap: 24px;
+    margin: 30px 0;
+  }
+
+  .tier {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    background: var(--paper-warm);
+    border: 1px solid var(--line-soft);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .tier:hover {
+    transform: translateX(4px);
+    box-shadow: -8px 8px 0 var(--ink);
+  }
+
+  .tier-badge {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .tier-badge .num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    line-height: 1;
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  .tier-badge .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    margin-top: 6px;
+    opacity: 0.7;
+  }
+
+  .tier-body {
+    padding: 22px 28px;
+  }
+
+  .tier-body h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .tier-body p {
+    font-size: 14.5px;
+    margin-bottom: 0;
+  }
+
+  .tier-body ul {
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tier-body li {
+    padding: 4px 0 4px 18px;
+    position: relative;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .tier-body li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ============ COMPANY TABLE ============ */
+  .company-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .company {
+    padding: 18px 22px;
+    background: var(--paper-warm);
+    border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--gold);
+  }
+
+  .company-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .company-loc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .company-desc {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ============ GAP CARDS ============ */
+  .gap {
+    margin: 30px 0;
+    padding: 30px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    position: relative;
+  }
+
+  .gap-rank {
+    position: absolute;
+    top: -16px;
+    left: 24px;
+    background: var(--accent);
+    color: var(--paper);
+    padding: 6px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+  }
+
+  .gap-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 12px 0 6px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .gap-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+
+  /* ============ PHASE TIMELINE ============ */
+  .timeline {
+    margin: 30px 0;
+    position: relative;
+    padding-left: 30px;
+    border-left: 2px solid var(--line);
+  }
+
+  .phase {
+    margin-bottom: 35px;
+    position: relative;
+  }
+
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: -38px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border: 3px solid var(--paper);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .phase-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .phase-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  /* ============ DECISION TABLE ============ */
+  .decision-table {
+    margin: 30px 0;
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .decision-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .decision-row:last-child {
+    border-bottom: none;
+  }
+
+  .decision-row.header {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .decision-row.header > div {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px 24px;
+  }
+
+  .decision-row > div {
+    padding: 18px 24px;
+  }
+
+  .decision-row > div:first-child {
+    background: var(--paper-warm);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink);
+    border-right: 1px solid var(--line-soft);
+    font-size: 15px;
+  }
+
+  .decision-row > div:last-child {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+
+  /* ============ RISK BOX ============ */
+  .risk-list {
+    counter-reset: risk;
+    margin: 30px 0;
+  }
+
+  .risk-item {
+    counter-increment: risk;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .risk-item:last-child {
+    border-bottom: none;
+  }
+
+  .risk-item::before {
+    content: counter(risk, decimal-leading-zero);
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    line-height: 0.8;
+    color: var(--accent);
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .risk-item h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .risk-item p {
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  /* ============ ACTION CHECKLIST ============ */
+  .action-list {
+    margin: 30px 0;
+    counter-reset: action;
+  }
+
+  .action-item {
+    counter-increment: action;
+    display: flex;
+    gap: 20px;
+    padding: 16px 20px;
+    background: var(--paper-warm);
+    margin-bottom: 10px;
+    border-left: 3px solid var(--success);
+    align-items: flex-start;
+  }
+
+  .action-item::before {
+    content: counter(action);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--success);
+    font-size: 14px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  /* ============ ADVISOR DECISIONS ============ */
+  .advisor-matrix {
+    margin: 30px 0;
+  }
+
+  .advisor-q {
+    background: var(--paper-warm);
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    border: 1px solid var(--line-soft);
+  }
+
+  .advisor-q h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+
+  .advisor-options {
+    display: grid;
+    gap: 8px;
+  }
+
+  .advisor-option {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--line-soft);
+    font-size: 14px;
+  }
+
+  .advisor-option:last-child {
+    border-bottom: none;
+  }
+
+  .advisor-option strong {
+    color: var(--ink);
+    font-size: 13.5px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 60px 0 80px;
+    text-align: center;
+    border-top: 2px solid var(--ink);
+    margin-top: 60px;
+  }
+
+  .footer-mark {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .footer-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    .container { padding: 0 24px; }
+    .toc ol { columns: 1; }
+    .byline { grid-template-columns: repeat(2, 1fr); }
+    .company-grid { grid-template-columns: 1fr; }
+    .section-header { grid-template-columns: 1fr; gap: 8px; }
+    .section-number { font-size: 2.5rem; }
+    .section-title { font-size: 1.7rem; }
+    .tier { grid-template-columns: 70px 1fr; }
+    .decision-row { grid-template-columns: 1fr; }
+    .advisor-option { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <div class="masthead-meta">
+      <span>Strategic Brief · No. 01</span>
+    </div>
+    <div class="title-block">
+      <div class="eyebrow">Market Entry · New Jersey</div>
+      <h1 class="title">Agentic AI for <em>Small Generics Pharma</em></h1>
+      <p class="subtitle">A founder's guide to use cases, market gaps, and a six-month path to first revenue.</p>
+    </div>
+    <div class="byline">
+      <div class="byline-item">
+        <div class="label">Sector</div>
+        <div class="value">Generic Pharmaceuticals</div>
+      </div>
+      <div class="byline-item">
+        <div class="label">Geography</div>
+        <div class="value">New Jersey, US</div>
+      </div>
+      <div class="byline-item">
+        <div class="label">Founder Profile</div>
+        <div class="value">Technical · SaaS · Pharma Advisor</div>
+      </div>
+      <div class="byline-item">
+        <div class="label">Horizon</div>
+        <div class="value">6 Months to Revenue</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ TOC ============ -->
+  <nav class="toc">
+    <ol>
+      <li><a href="#part1">The Opportunity in Generics</a></li>
+      <li><a href="#part2">Tiered Use Cases by Impact</a></li>
+      <li><a href="#part3">Target Accounts in New Jersey</a></li>
+      <li><a href="#part4">The Competitive Landscape</a></li>
+      <li><a href="#part5">Five Gaps Worth Attacking</a></li>
+      <li><a href="#part6">Founder Reality Check</a></li>
+      <li><a href="#part7">The Wedge: Patent &amp; IP Intelligence</a></li>
+      <li><a href="#part8">Six-Month Execution Plan</a></li>
+      <li><a href="#part9">Risks That Will Kill You</a></li>
+      <li><a href="#part10">The Advisor Multiplier</a></li>
+      <li><a href="#part11">Action Items: This Week</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ PART 1 ============ -->
+  <section id="part1">
+    <div class="section-header">
+      <div class="section-number">I</div>
+      <div>
+        <span class="section-kicker">Framing</span>
+        <h2 class="section-title">The Opportunity in Generics</h2>
+      </div>
+    </div>
+
+    <p class="lead">For small generics players, the highest-ROI use cases of agentic AI are not the glamorous ones. Generics is a race against the clock and against margins — and agentic AI's biggest leverage lies in collapsing timelines for ANDA filing, regulatory work, and operational drudgery, not in inventing molecules.</p>
+
+    <p>Industry consensus in 2026 backs this up: the most immediate value isn't drug discovery or clinical trials — it's operations, quality, and regulatory acceleration. The companies that win Paragraph IV races and first-to-file positions are the ones who can compress weeks of regulatory and CMC work into days.</p>
+
+    <div class="callout">
+      <div class="callout-label">Why this matters</div>
+      <p>A single first-to-file ANDA can be worth <strong>$10M+ in 180-day exclusivity revenue</strong>. Even a 2–3 week compression on ANDA prep translates directly into millions for a 100-person generics shop.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+  <section id="part2">
+    <div class="section-header">
+      <div class="section-number">II</div>
+      <div>
+        <span class="section-kicker">Use Cases</span>
+        <h2 class="section-title">Tiered Use Cases by Impact</h2>
+      </div>
+    </div>
+
+    <p>Not every agentic AI application matters equally. Below is a ranked view of where small generics should focus, ordered by direct revenue impact and operational leverage.</p>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-badge">
+          <div class="num">1</div>
+          <div class="lbl">Tier</div>
+        </div>
+        <div class="tier-body">
+          <h3>Direct Revenue Impact — ANDA &amp; Paragraph IV Acceleration</h3>
+          <ul>
+            <li>Continuous Orange Book monitoring &amp; patent expiration flagging</li>
+            <li>Reference Listed Drug labeling diff for §505(j) compliance</li>
+            <li>ANDA Module 1 (administrative) draft generation</li>
+            <li>Patent landscape monitoring — USPTO, PTAB, formulation patents</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tier">
+        <div class="tier-badge">
+          <div class="num">2</div>
+          <div class="lbl">Tier</div>
+        </div>
+        <div class="tier-body">
+          <h3>Regulatory &amp; Quality Operations</h3>
+          <ul>
+            <li>OOS detection, batch record cross-referencing, deviation drafting</li>
+            <li>CAPA management and root cause analysis (the bottleneck for small QA teams)</li>
+            <li>FDA correspondence — deficiency letters, Information Requests</li>
+            <li>Bioequivalence study design support &amp; pharmacovigilance ICSR drafting</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tier">
+        <div class="tier-badge">
+          <div class="num">3</div>
+          <div class="lbl">Tier</div>
+        </div>
+        <div class="tier-body">
+          <h3>CMC &amp; Formulation</h3>
+          <ul>
+            <li>Excipient compatibility literature mining</li>
+            <li>Dissolution profile comparison against RLD</li>
+            <li>Stability data trending &amp; shelf-life prediction</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tier">
+        <div class="tier-badge">
+          <div class="num">4</div>
+          <div class="lbl">Tier</div>
+        </div>
+        <div class="tier-body">
+          <h3>Commercial Operations</h3>
+          <ul>
+            <li>Competitor pricing surveillance post-launch</li>
+            <li>GPO contract intelligence and 340B dynamics</li>
+            <li>Share-shift opportunity monitoring</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+  <section id="part3">
+    <div class="section-header">
+      <div class="section-number">III</div>
+      <div>
+        <span class="section-kicker">Geography</span>
+        <h2 class="section-title">Target Accounts in New Jersey</h2>
+      </div>
+    </div>
+
+    <p>NJ is the right hunting ground — known as "The Medicine Chest of the World," home to 14 of the world's 20 largest pharmaceutical companies and a deep bench of mid-sized generics players that fit the target profile.</p>
+
+    <div class="company-grid">
+      <div class="company">
+        <div class="company-name">Aurolife Pharma</div>
+        <div class="company-loc">South Brunswick</div>
+        <div class="company-desc">Generic products, 100,000 sq ft FDA-approved facility for oral solid dosage forms. Subsidiary of Aurobindo.</div>
+      </div>
+      <div class="company">
+        <div class="company-name">Alvogen</div>
+        <div class="company-loc">Montville</div>
+        <div class="company-desc">Over 50 products on market. Expanding into complex inhalation and 505(b)(2) products.</div>
+      </div>
+      <div class="company">
+        <div class="company-name">Zydus Pharmaceuticals USA</div>
+        <div class="company-loc">Pennington</div>
+        <div class="company-desc">Fifth largest unbranded generic corporation in the US. 129+ DMFs filed, 287 ANDA approvals.</div>
+      </div>
+      <div class="company">
+        <div class="company-name">Avet Pharmaceuticals</div>
+        <div class="company-loc">East Brunswick</div>
+        <div class="company-desc">Private generics company founded 2004. Cardiovascular, anti-infectives, pain management.</div>
+      </div>
+      <div class="company">
+        <div class="company-name">Cosette Pharmaceuticals</div>
+        <div class="company-loc">South Plainfield</div>
+        <div class="company-desc">Branded and generic. Dermatology and oral liquids. Founded 2019.</div>
+      </div>
+      <div class="company">
+        <div class="company-name">Ajanta Pharma USA</div>
+        <div class="company-loc">Bridgewater</div>
+        <div class="company-desc">Generics-focused subsidiary of Ajanta Pharma Ltd.</div>
+      </div>
+      <div class="company">
+        <div class="company-name">Lupin Pharmaceuticals</div>
+        <div class="company-loc">Somerset</div>
+        <div class="company-desc">Major Indian generics player with substantial US presence.</div>
+      </div>
+      <div class="company">
+        <div class="company-name">Glenmark Pharmaceuticals</div>
+        <div class="company-loc">Mahwah</div>
+        <div class="company-desc">Global generics with respiratory, dermatology, oncology focus.</div>
+      </div>
+      <div class="company">
+        <div class="company-name">Dr. Reddy's Laboratories</div>
+        <div class="company-loc">Princeton</div>
+        <div class="company-desc">Top-tier Indian generics. Broad US ANDA portfolio.</div>
+      </div>
+      <div class="company">
+        <div class="company-name">Hikma Pharmaceuticals</div>
+        <div class="company-loc">Berkeley Heights</div>
+        <div class="company-desc">Injectables and generics specialist with strong US footprint.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PART 4 ============ -->
+  <section id="part4">
+    <div class="section-header">
+      <div class="section-number">IV</div>
+      <div>
+        <span class="section-kicker">Competition</span>
+        <h2 class="section-title">The Competitive Landscape</h2>
+      </div>
+    </div>
+
+    <p class="lead">The agentic AI pharma space is active in 2026, but fragmented. No single player has locked it down for small generics — most solutions are built for Big Pharma workflows (NDAs, BLAs, clinical trials), not the ANDA/Paragraph IV/CMC-heavy workflows of generics. This is good news.</p>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-badge" style="background: var(--accent-deep);">
+          <div class="num" style="color: var(--paper);">A</div>
+          <div class="lbl">Tier</div>
+        </div>
+        <div class="tier-body">
+          <h3>Enterprise Incumbents</h3>
+          <p><strong>Veeva Systems</strong>, <strong>Microsoft Copilot</strong>, <strong>Salesforce Agentforce</strong>. Embedded in nearly every NJ pharma. Platform vendors with bolted-on AI, not agentic-first. Too heavy for sub-200-person shops.</p>
+        </div>
+      </div>
+
+      <div class="tier">
+        <div class="tier-badge" style="background: var(--accent-deep);">
+          <div class="num" style="color: var(--paper);">B</div>
+          <div class="lbl">Tier</div>
+        </div>
+        <div class="tier-body">
+          <h3>Agentic Pure-Plays — Regulatory Writing</h3>
+          <p><strong>Narrativa</strong> (eCTD-focused agentic platform), <strong>DDi's REGai</strong>, <strong>IntuitionLabs</strong>. Direct competitors for ANDA/CTD use cases but oriented toward larger pharma.</p>
+        </div>
+      </div>
+
+      <div class="tier">
+        <div class="tier-badge" style="background: var(--accent-deep);">
+          <div class="num" style="color: var(--paper);">C</div>
+          <div class="lbl">Tier</div>
+        </div>
+        <div class="tier-body">
+          <h3>Pharmacovigilance Specialists</h3>
+          <p><strong>ArisGlobal, Oracle Empirica, VigiLanz, Tech Mahindra/NVIDIA, Genpact Cora, YEZA.ai</strong>. Mature segment — agentic AI is reclaiming up to 40% of PV capacity. Hard to disrupt cold.</p>
+        </div>
+      </div>
+
+      <div class="tier">
+        <div class="tier-badge" style="background: var(--accent-deep);">
+          <div class="num" style="color: var(--paper);">D</div>
+          <div class="lbl">Tier</div>
+        </div>
+        <div class="tier-body">
+          <h3>Quality / CAPA Specialists</h3>
+          <p><strong>iFactory Healthcare</strong>, <strong>Entefy</strong>, <strong>Dheera</strong>, <strong>Rephine</strong>. Agentic, GMP-validated, AI-assisted root cause analysis. Crowded but priced for larger shops.</p>
+        </div>
+      </div>
+
+      <div class="tier">
+        <div class="tier-badge" style="background: var(--accent-deep);">
+          <div class="num" style="color: var(--paper);">E</div>
+          <div class="lbl">Tier</div>
+        </div>
+        <div class="tier-body">
+          <h3>The FDA Itself</h3>
+          <p>December 2025: FDA deployed agentic AI ("Elsa") for all employees. Normalizes agentic AI in submissions — lowers buyer hesitation. But Elsa's documented hallucination issues create exact governance objections your prospects will raise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PART 5 ============ -->
+  <section id="part5">
+    <div class="section-header">
+      <div class="section-number">V</div>
+      <div>
+        <span class="section-kicker">White Space</span>
+        <h2 class="section-title">Five Gaps Worth Attacking</h2>
+      </div>
+    </div>
+
+    <p>Ranked by defensibility — a combination of how underserved each gap is, how willing small generics are to pay, and how durable the position becomes once you're in.</p>
+
+    <div class="gap">
+      <div class="gap-rank">Gap 01</div>
+      <h3 class="gap-title">ANDA-in-a-Box</h3>
+      <div class="gap-tag">Highest opportunity · Hardest to build</div>
+      <p>No agentic suite exists today that's generics-native. Everyone in regulatory writing (Narrativa, DDi, IntuitionLabs) is solving NDA/BLA workflows. The biggest white space: Orange Book monitoring, RLD labeling diff, ANDA Module 1 drafting, bioequivalence study scaffolding, deficiency letter response drafting — purpose-built for the ANDA pathway.</p>
+      <p><strong>Defensibility:</strong> Generics-specific taxonomies, RLD comparison libraries, and ANDA precedent databases compound over time. Big platforms won't bother — TAM looks too small to them, perfect for a focused company.</p>
+    </div>
+
+    <div class="gap">
+      <div class="gap-rank">Gap 02</div>
+      <h3 class="gap-title">Patent Landscape &amp; IP Intelligence</h3>
+      <div class="gap-tag">Easiest entry point · Best wedge</div>
+      <p>Small generics already pay $50K–$300K/year to IP law firms, patent watchers (Clarivate Derwent, Questel), and internal analysts. The agentic version is 10× cheaper to deliver, requires no GxP validation, has zero 21 CFR Part 11 burden, and can be demoed in week one using public data.</p>
+      <p><strong>Why this is the wedge:</strong> Cleanest, fastest path inside the account. Once you're trusted, you sell everything else.</p>
+    </div>
+
+    <div class="gap">
+      <div class="gap-rank">Gap 03</div>
+      <h3 class="gap-title">Small-Shop CAPA &amp; Deviation Co-Pilot</h3>
+      <div class="gap-tag">Crowded but winnable</div>
+      <p>iFactory, Entefy, Dheera, and Microsoft Copilot are here. But all are either enterprise-priced or generic horizontal AI. The gap: a CAPA agent priced and validated specifically for sub-200-person generics manufacturers, with pre-built IQ/OQ/PQ packages and Annex 22 governance baked in.</p>
+      <p><strong>The moat:</strong> Not the AI — the validation package and GxP-ready deployment. Newer entrants chronically underestimate this.</p>
+    </div>
+
+    <div class="gap">
+      <div class="gap-rank">Gap 04</div>
+      <h3 class="gap-title">CMC / Formulation Knowledge Agent</h3>
+      <div class="gap-tag">Underserved · Longer sales cycle</div>
+      <p>Almost nobody is building agents for excipient compatibility mining, dissolution profile comparison, stability trending, or forced degradation study design. The buyer is the formulation scientist — shorter ROI proof cycles, smaller initial contracts. A good second product, not first.</p>
+    </div>
+
+    <div class="gap">
+      <div class="gap-rank">Gap 05</div>
+      <h3 class="gap-title">Global Regulatory Intelligence</h3>
+      <div class="gap-tag">High value · Requires multilingual capability</div>
+      <p>NJ generics file with FDA but also EMA, Health Canada, ANVISA, CDSCO. An agent that ingests global regulatory guidance updates, maps them to active dossiers, and flags what needs updating is genuinely valuable for mid-sized players — and nobody's doing it well.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 6 ============ -->
+  <section id="part6">
+    <div class="section-header">
+      <div class="section-number">VI</div>
+      <div>
+        <span class="section-kicker">Reality Check</span>
+        <h2 class="section-title">Founder Reality Check</h2>
+      </div>
+    </div>
+
+    <p class="lead">Three constraints don't naturally align: technical founder without pharma background, SaaS product model, and a 3–6 month timeline. Pharma SaaS sales cycles in regulated workflows are 6–18 months. Procurement, IT security, GxP validation, and quality agreements take time even when the buyer loves you.</p>
+
+    <div class="callout warning">
+      <div class="callout-label">The hard truth</div>
+      <p>Trying to sell GxP-validated SaaS to small generics in 6 months as a solo technical founder will end in running out of money. The strategy has to bend.</p>
+    </div>
+
+    <p>The bend: pick a <strong>non-GxP wedge</strong>, sell it as SaaS, expand into regulated workflows later. The product must (a) not touch GMP or require 21 CFR Part 11 validation, (b) solve a pain a Director-level buyer can sign off on without a 6-month procurement cycle, (c) play to AI/ML strengths, and (d) have a natural expansion path into regulated workflows later.</p>
+
+    <p>That product is Gap 02: <strong>Patent Landscape &amp; IP Intelligence.</strong></p>
+  </section>
+
+  <!-- ============ PART 7 ============ -->
+  <section id="part7">
+    <div class="section-header">
+      <div class="section-number">VII</div>
+      <div>
+        <span class="section-kicker">The Wedge</span>
+        <h2 class="section-title">Patent &amp; IP Intelligence</h2>
+      </div>
+    </div>
+
+    <p>Why this wedge works under your specific constraints:</p>
+
+    <div class="decision-table">
+      <div class="decision-row header">
+        <div>Attribute</div>
+        <div>Why It Fits</div>
+      </div>
+      <div class="decision-row">
+        <div>Not GxP</div>
+        <div>Patent monitoring is business intelligence, not quality or regulatory submission work. No validation package, no quality agreement.</div>
+      </div>
+      <div class="decision-row">
+        <div>Faster buyer</div>
+        <div>VP of Business Development or Head of IP — discretionary budget $50K–$150K, no enterprise committee.</div>
+      </div>
+      <div class="decision-row">
+        <div>Public data</div>
+        <div>USPTO, Orange Book, PTAB, EMA, court dockets. No customer system access needed. Demoable in week one.</div>
+      </div>
+      <div class="decision-row">
+        <div>AI/ML-native</div>
+        <div>Document ingestion at scale, entity resolution, classification of patent types, agentic monitoring workflows. Plays to your strengths.</div>
+      </div>
+      <div class="decision-row">
+        <div>Budget already exists</div>
+        <div>Small generics already pay for Clarivate, Questel, IP law firms. Not creating budget — redirecting it.</div>
+      </div>
+      <div class="decision-row">
+        <div>Natural expansion</div>
+        <div>Patent intel is the Trojan horse. Once trusted, sell ANDA workflows, then CMC, then quality.</div>
+      </div>
+    </div>
+
+    <h3 style="font-family: 'Fraunces', serif; font-size: 1.5rem; margin: 40px 0 20px; color: var(--ink);">The MVP — Three Agentic Workflows</h3>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-badge" style="background: var(--success);">
+          <div class="num">01</div>
+          <div class="lbl">Workflow</div>
+        </div>
+        <div class="tier-body">
+          <h3>Pipeline Monitor</h3>
+          <p>Customer uploads target molecule list (10–50 drugs). Agent continuously monitors Orange Book listings, patent term extensions, pediatric exclusivity, 180-day exclusivity status. Output: weekly digest + dashboard.</p>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="tier-badge" style="background: var(--success);">
+          <div class="num">02</div>
+          <div class="lbl">Workflow</div>
+        </div>
+        <div class="tier-body">
+          <h3>Patent Thicket Analyzer</h3>
+          <p>For any molecule, crawls USPTO, maps the patent family tree (composition, formulation, polymorph, method-of-use), flags PIV-challengeable patents, and dates expirations. Replaces a 20-hour paralegal task.</p>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="tier-badge" style="background: var(--success);">
+          <div class="num">03</div>
+          <div class="lbl">Workflow</div>
+        </div>
+        <div class="tier-body">
+          <h3>Competitive ANDA Intelligence</h3>
+          <p>Tracks competitor ANDA filings via FDA monthly approvals + Paragraph IV certifications list. Flags when competitors file on pipeline molecules, estimates first-to-file status. Gold for BD teams.</p>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 24px;">Credible MVP. Solo technical founder can build it in <strong>8–12 weeks.</strong></p>
+
+    <div class="callout">
+      <div class="callout-label">Pricing floor</div>
+      <p>Floor at <strong>$25K/year</strong> for the smallest customers. Target $30K–$50K ACV. Technical founders chronically underprice into pharma — the value (single first-to-file ANDA = $10M+) dwarfs the contract. Anything less signals you're not serious.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 8 ============ -->
+  <section id="part8">
+    <div class="section-header">
+      <div class="section-number">VIII</div>
+      <div>
+        <span class="section-kicker">Execution</span>
+        <h2 class="section-title">Six-Month Execution Plan</h2>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-period">Months 0–1 · Validation</div>
+        <div class="phase-title">Discovery Before Code</div>
+        <p>Run <strong>15 customer discovery calls</strong> with VP/Director of BD, Head of IP, Director of Portfolio Strategy at NJ generics. Don't sell — ask: "How do you currently track patent expirations on your pipeline? What's painful? What would you pay to fix?" If 8+ of 15 describe the same pain, the product is real.</p>
+      </div>
+
+      <div class="phase">
+        <div class="phase-period">Months 1–3 · Build</div>
+        <div class="phase-title">MVP + First Design Partner</div>
+        <p>Pick one of the 15 as design partner: free use for 6 months in exchange for weekly feedback and a case study. Build <em>with</em> them, not for them. In parallel, formalize the pharma advisor's role with equity and explicit permission to use their name publicly.</p>
+      </div>
+
+      <div class="phase">
+        <div class="phase-period">Months 3–5 · Close</div>
+        <div class="phase-title">Convert Design Partner + Close 2–3 More</div>
+        <p>Design partner converts to paid contract ($24K–$48K/year realistic). Use them as reference. Sell next accounts through warm intros — ideally surfaced by the pharma advisor's network. Target $30K–$50K ACV.</p>
+      </div>
+
+      <div class="phase">
+        <div class="phase-period">Month 6 · Inflection</div>
+        <div class="phase-title">$80K–$150K ARR · Decide Next Wedge</div>
+        <p>3–4 paying customers. Based on what they ask for, pick next workflow: ANDA Module 1 drafting, deficiency letter response, or global regulatory intelligence. Enough revenue to (a) prove the model, (b) raise a seed round, or (c) bootstrap to month 12.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PART 9 ============ -->
+  <section id="part9">
+    <div class="section-header">
+      <div class="section-number">IX</div>
+      <div>
+        <span class="section-kicker">Risks</span>
+        <h2 class="section-title">Risks That Will Kill You</h2>
+      </div>
+    </div>
+
+    <div class="risk-list">
+      <div class="risk-item">
+        <div>
+          <h4>Hallucinations in Patent Analysis</h4>
+          <p>Patent law is precise. A wrong claim about whether a patent blocks a generic can cost millions. Architecture must include retrieval-augmented generation with strict citation back to source documents, confidence scores on every output, human-in-the-loop UX with IP attorney validation, and eval datasets built with the pharma advisor. This is both your moat <em>and</em> your liability — spend disproportionate engineering time here.</p>
+        </div>
+      </div>
+
+      <div class="risk-item">
+        <div>
+          <h4>Selling to QA or Regulatory First</h4>
+          <p>They're the wrong buyers for a non-validated product. They will ask for 21 CFR Part 11 compliance you don't have. Sell to <strong>BD, IP, and Portfolio Strategy</strong> where buying criteria are different — discretionary budget, no validation requirement, faster decision cycle.</p>
+        </div>
+      </div>
+
+      <div class="risk-item">
+        <div>
+          <h4>Underpricing</h4>
+          <p>Technical founders selling into pharma chronically underprice because the deal sizes feel huge compared to consumer SaaS. They are not. The value created dwarfs the contract. Floor your pricing at $25K/year for the smallest customer. Charging less signals lack of seriousness and creates a ceiling you can't escape later.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PART 10 ============ -->
+  <section id="part10">
+    <div class="section-header">
+      <div class="section-number">X</div>
+      <div>
+        <span class="section-kicker">Acceleration</span>
+        <h2 class="section-title">The Advisor Multiplier</h2>
+      </div>
+    </div>
+
+    <p>Having a pharma advisor unlocks three things: credibility on regulatory-adjacent workflows, faster validation of AI outputs, and access to warm intros. But <em>how</em> the advisor is engaged dictates which strategy to run.</p>
+
+    <div class="advisor-matrix">
+      <div class="advisor-q">
+        <h4>By engagement level</h4>
+        <div class="advisor-options">
+          <div class="advisor-option">
+            <div><strong>Casual (hrs/month)</strong></div>
+            <div>Stay with the patent/IP wedge. Advisor is credibility signal + sanity check, not a sales asset.</div>
+          </div>
+          <div class="advisor-option">
+            <div><strong>Active (5–10 hrs/wk)</strong></div>
+            <div>Expand wedge. Co-sell. Move toward ANDA Module 1 drafting as an early product.</div>
+          </div>
+          <div class="advisor-option">
+            <div><strong>Near co-founder</strong></div>
+            <div>Different company. Go straight at ANDA-in-a-box (Gap 01). Give 5–15% equity, treat as domain co-founder. Raise seed on strength of founding team.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="advisor-q">
+        <h4>By domain expertise</h4>
+        <div class="advisor-options">
+          <div class="advisor-option">
+            <div><strong>Regulatory / ANDA</strong></div>
+            <div>Lead with ANDA workflow automation, not patent intel. Specific MVP: deficiency letter drafter or Module 1 generator.</div>
+          </div>
+          <div class="advisor-option">
+            <div><strong>Quality / CMC</strong></div>
+            <div>Pivot to CAPA/deviation co-pilot (Gap 03). Compete on small-shop pricing + validation depth.</div>
+          </div>
+          <div class="advisor-option">
+            <div><strong>IP / Hatch-Waxman</strong></div>
+            <div>Patent intelligence wedge is perfect. Their expertise covers the highest-risk part of the product.</div>
+          </div>
+          <div class="advisor-option">
+            <div><strong>BD / Commercial</strong></div>
+            <div>Competitive intelligence + portfolio strategy agent. Buyer is VP of BD. Faster but less defensible.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="advisor-q">
+        <h4>By network strength</h4>
+        <div class="advisor-options">
+          <div class="advisor-option">
+            <div><strong>Strong NJ network</strong></div>
+            <div>Skip cold outreach. First 5 customers come from advisor intros. <strong>Single biggest accelerant possible</strong> — warm intros convert at 10–20× cold.</div>
+          </div>
+          <div class="advisor-option">
+            <div><strong>Some contacts</strong></div>
+            <div>Hybrid. Advisor opens 3–5 doors, you cold-outreach the rest of the target list.</div>
+          </div>
+          <div class="advisor-option">
+            <div><strong>Limited network</strong></div>
+            <div>Plan stays largely as written. Advisor value is product + validation, not distribution.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Constants regardless of advisor profile</div>
+      <p><strong>Equity now, not later.</strong> Casual: 0.25–1% over 2-year vest. Active: 1–3%. Co-founder: 5–15%. Paper before any network introductions happen.</p>
+      <p><strong>Their name on the website and pitches.</strong> Pharma buyers Google and check LinkedIn. Respected name visible on day one is worth months of trust-building.</p>
+      <p><strong>Advisors don't sell.</strong> Advisors who pitch lose credibility. They open doors and validate technically — you close.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 11 ============ -->
+  <section id="part11">
+    <div class="section-header">
+      <div class="section-number">XI</div>
+      <div>
+        <span class="section-kicker">Next Steps</span>
+        <h2 class="section-title">Action Items: This Week</h2>
+      </div>
+    </div>
+
+    <div class="action-list">
+      <div class="action-item">
+        Build a target list of 30 accounts — NJ + Philly + NY metro. Widen beyond NJ to expand the funnel.
+      </div>
+      <div class="action-item">
+        Identify the BD and IP leaders at each account via LinkedIn. Build a tracking spreadsheet.
+      </div>
+      <div class="action-item">
+        Draft a customer-discovery outreach message — not a sales pitch. The ask is for a 30-minute conversation about pain, not a demo.
+      </div>
+      <div class="action-item">
+        Book 15 discovery calls over the next 3 weeks.
+      </div>
+      <div class="action-item">
+        Lock down the pharma advisor's engagement level, equity, and permission to use their name. Get it papered.
+      </div>
+      <div class="action-item">
+        Map the advisor's NJ network and identify the 3–5 highest-priority warm intros to request first.
+      </div>
+      <div class="action-item">
+        Start sketching MVP architecture for the three patent-intelligence workflows. Eight to twelve weeks of build starts when discovery validates the wedge.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="footer-mark">— end of brief —</div>
+    <div class="footer-note">Strategic Brief · Agentic AI · Small Generics Pharma · NJ</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

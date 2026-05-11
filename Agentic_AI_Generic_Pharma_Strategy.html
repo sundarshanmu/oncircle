@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agentic AI for Small Generic Pharma — Strategy Deck</title>
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --navy-deep: #07162A;
+    --teal: #008C9E;
+    --teal-light: #E1F5EE;
+    --orange: #E87A33;
+    --orange-light: #FAEEDA;
+    --green: #2E7D32;
+    --green-light: #EAF3DE;
+    --red: #C62828;
+    --red-light: #FCEBEB;
+    --amber: #E69A00;
+    --amber-light: #FAEEDA;
+    --bg: #F5F7FA;
+    --surface: #FFFFFF;
+    --border: #E2E6EC;
+    --border-strong: #C8D0DA;
+    --text: #1A1A1A;
+    --text-muted: #4A5568;
+    --text-faint: #8B95A3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body { padding: 24px 0 80px; }
+
+  /* ---------- Top control bar ---------- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  }
+  .topbar-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .topbar-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .topbar-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .topbar-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .ctrl-btn {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .ctrl-btn:hover {
+    background: var(--bg);
+    border-color: var(--navy);
+  }
+  .ctrl-btn.primary {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+  }
+  .ctrl-btn.primary:hover { background: var(--navy-deep); }
+  .ctrl-select {
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    background: var(--surface);
+    cursor: pointer;
+    max-width: 240px;
+  }
+
+  /* ---------- Slide container ---------- */
+  .deck {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .slide {
+    background: var(--surface);
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 36px;
+    overflow: hidden;
+    position: relative;
+    page-break-after: always;
+  }
+  .slide-inner {
+    padding: 36px 44px 32px;
+    min-height: 580px;
+  }
+  .slide-accent {
+    height: 4px;
+    background: var(--teal);
+  }
+  .slide-eyebrow {
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .slide-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+  .slide-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+  }
+  .slide-divider {
+    width: 56px;
+    height: 3px;
+    background: var(--orange);
+    border-radius: 2px;
+    margin-bottom: 22px;
+  }
+  .slide-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--text-faint);
+    padding: 8px 44px 14px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ---------- Layout helpers ---------- */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .card.flat {
+    background: var(--bg);
+    border: none;
+  }
+  .card-headline {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .card-body {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .card-label {
+    color: white;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    padding: 8px 14px;
+    margin: -16px -18px 12px;
+    border-radius: 8px 8px 0 0;
+  }
+  .label-teal { background: var(--teal); }
+  .label-orange { background: var(--orange); }
+  .label-navy { background: var(--navy); }
+  .label-red { background: var(--red); }
+  .label-green { background: var(--green); }
+  .label-amber { background: var(--amber); }
+  .label-grey { background: var(--text-muted); }
+
+  /* ---------- Stat cards ---------- */
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    border-left: 4px solid var(--teal);
+  }
+  .stat-num {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .stat-card.orange { border-left-color: var(--orange); }
+  .stat-card.orange .stat-num { color: var(--orange); }
+  .stat-card.red { border-left-color: var(--red); }
+  .stat-card.red .stat-num { color: var(--red); }
+  .stat-card.green { border-left-color: var(--green); }
+  .stat-card.green .stat-num { color: var(--green); }
+  .stat-card.teal .stat-num { color: var(--teal); }
+
+  /* ---------- Lists ---------- */
+  .clean-list {
+    list-style: none;
+    padding: 0;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.85;
+  }
+  .clean-list li {
+    padding-left: 18px;
+    position: relative;
+  }
+  .clean-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: var(--teal);
+    font-weight: 700;
+  }
+  .col-header {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .col-header.warn { color: var(--orange); }
+  .col-header.info { color: var(--teal); }
+
+  /* ---------- Tier rows ---------- */
+  .tier-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .tier-label {
+    color: white;
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .tier-label-name {
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+  .tier-label-sub {
+    opacity: 0.9;
+    font-size: 11px;
+  }
+  .tier-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+
+  /* ---------- Pills ---------- */
+  .pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.04em;
+  }
+  .pill-easy { background: var(--green-light); color: var(--green); }
+  .pill-med { background: var(--amber-light); color: var(--amber); }
+  .pill-hard { background: var(--red-light); color: var(--red); }
+
+  /* ---------- Module 1 table ---------- */
+  .module1-table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+  }
+  .module1-table td { padding: 6px 0; }
+  .module1-table .sec-num {
+    font-weight: 600;
+    color: var(--navy);
+    width: 60px;
+  }
+
+  /* ---------- Why-wedge cards ---------- */
+  .why-card {
+    background: var(--bg);
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+  }
+  .why-card-h {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .why-card-b {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .price-strip {
+    background: var(--navy);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  .price-strip .lbl {
+    font-size: 11px;
+    color: var(--orange);
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .price-strip .val {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* ---------- Agent boxes ---------- */
+  .agent-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    border-top: 3px solid var(--teal);
+  }
+  .agent-box.warn { border-top-color: var(--orange); }
+  .agent-box.danger { border-top-color: var(--red); }
+  .agent-box.success { border-top-color: var(--green); }
+  .agent-box.dark { border-top-color: var(--navy); }
+  .agent-num {
+    font-size: 10px;
+    color: var(--text-faint);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 3px;
+  }
+  .agent-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .agent-desc {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+
+  /* ---------- Console (terminal-style) ---------- */
+  .console {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 18px 22px;
+    font-family: "SF Mono", "Consolas", "Monaco", monospace;
+    font-size: 11.5px;
+    line-height: 1.75;
+    color: #d4d4d4;
+  }
+  .console .ok { color: #6bb86b; }
+  .console .err { color: #e25555; }
+  .console .warn { color: #e0a020; }
+  .console .head { color: #d99060; font-weight: 600; }
+  .console .dim { color: #888; }
+  .console b { font-weight: 600; }
+
+  /* ---------- Decision steps ---------- */
+  .step-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: white;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .step-num.green { background: var(--green); }
+  .step-num.orange { background: var(--orange); }
+  .step-num.red { background: var(--red); }
+  .step-num.amber { background: var(--amber); }
+  .step-num.navy { background: var(--navy); }
+  .step-q { font-size: 13px; font-weight: 600; color: var(--text); }
+  .step-a { font-size: 11.5px; color: var(--text-muted); font-style: italic; }
+
+  /* ---------- Tables ---------- */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .data-table th {
+    background: var(--navy);
+    color: white;
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .data-table th.num, .data-table td.num { text-align: right; }
+  .data-table td {
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table tr:nth-child(even) td { background: var(--bg); }
+  .data-table .name { font-weight: 600; color: var(--navy); }
+  .data-table tr.hl td {
+    background: #EFF4FA;
+    font-weight: 600;
+  }
+  .data-table tr.pos td.num { color: var(--green); }
+  .data-table tr.neg td.num { color: var(--red); }
+
+  /* ---------- Quad cards (GTM) ---------- */
+  .quad-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .quad-head {
+    color: white;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .quad-body {
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  /* ---------- Risk cards ---------- */
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    border-left: 3px solid var(--red);
+  }
+  .risk-card.warn { border-left-color: var(--amber); }
+  .risk-h {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .risk-what {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .risk-mit {
+    font-size: 11.5px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .risk-mit strong { font-weight: 600; }
+
+  /* ---------- Phase cards ---------- */
+  .phase-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .phase-head {
+    color: white;
+    padding: 10px 14px;
+  }
+  .phase-when {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+  .phase-body { padding: 14px 16px; }
+  .phase-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .phase-what {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .phase-goal-l {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .phase-goal {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+  }
+
+  /* ---------- Title slide ---------- */
+  .title-slide {
+    background: var(--navy);
+    color: white;
+    padding: 80px 60px;
+    min-height: 580px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+  .title-slide::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 40%;
+    width: 180px;
+    height: 4px;
+    background: var(--orange);
+  }
+  .title-slide::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: calc(40% + 14px);
+    width: 100px;
+    height: 4px;
+    background: var(--teal);
+  }
+  .title-eyebrow {
+    font-size: 12px;
+    color: var(--orange);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  .title-h {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    letter-spacing: -0.015em;
+  }
+  .title-sub {
+    font-size: 22px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 12px;
+  }
+  .title-meta {
+    font-size: 14px;
+    color: var(--teal);
+    margin-bottom: 60px;
+  }
+  .title-foot {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 14px;
+  }
+
+  /* ---------- Closing slide ---------- */
+  .closing-slide {
+    background: var(--navy);
+    color: white;
+    padding: 60px 50px;
+    min-height: 580px;
+  }
+  .closing-eyebrow {
+    font-size: 12px;
+    color: var(--orange);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .closing-h {
+    font-size: 44px;
+    font-weight: 700;
+    margin-bottom: 36px;
+    letter-spacing: -0.015em;
+  }
+  .closing-row {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+  .closing-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: white;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .closing-h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .closing-body {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+  .closing-body em {
+    color: var(--teal);
+    font-style: italic;
+  }
+
+  /* ---------- Sensitivity slide ---------- */
+  .scenario-card {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .scenario-head { color: white; padding: 12px 14px; }
+  .scenario-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+    margin-bottom: 2px;
+  }
+  .scenario-name {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .scenario-body { padding: 12px 14px; }
+  .scenario-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .scenario-row:last-child { border-bottom: 0; }
+  .scenario-row .l { color: var(--text-muted); }
+  .scenario-row .v { font-weight: 600; color: var(--text); }
+  .scenario-tag {
+    background: var(--bg);
+    padding: 8px 14px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+  }
+  .what-kills {
+    background: var(--red-light);
+    border-left: 4px solid var(--red);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+  .what-kills-l {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .what-kills-b {
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ---------- Speaker notes ---------- */
+  .notes-toggle-area {
+    margin-top: 0;
+    border-top: 1px dashed var(--border);
+  }
+  details.notes {
+    background: #FFFBF0;
+    border-radius: 0 0 10px 10px;
+  }
+  details.notes summary {
+    padding: 10px 24px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--orange);
+    cursor: pointer;
+    text-transform: uppercase;
+    list-style: none;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  details.notes summary::-webkit-details-marker { display: none; }
+  details.notes summary::before {
+    content: "▸";
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.15s;
+  }
+  details.notes[open] summary::before { transform: rotate(90deg); }
+  details.notes summary:hover { background: #FFF5E0; }
+  .notes-content {
+    padding: 14px 28px 22px;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--text);
+    background: #FFFBF0;
+  }
+  .notes-content .timing {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+  .notes-content .say {
+    border-left: 3px solid var(--orange);
+    padding: 8px 14px;
+    background: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+    font-style: italic;
+    color: var(--text);
+  }
+  .notes-content .say-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--orange);
+    margin-bottom: 4px;
+    font-style: normal;
+    display: block;
+  }
+  .notes-content .qa {
+    background: rgba(255,255,255,0.5);
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+  .notes-content .qa-l {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--red);
+    margin-bottom: 4px;
+  }
+  .notes-content .qa-q {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .notes-content .qa-a {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .notes-content .tip {
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 8px;
+  }
+
+  /* ---------- Bottom callout strip ---------- */
+  .callout {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .callout.navy { background: var(--navy); color: white; }
+  .callout.flat { background: var(--bg); color: var(--text); font-style: italic; }
+  .callout.info { background: #EFF4FA; color: var(--navy); border-left: 3px solid var(--teal); }
+  .callout.action { background: var(--teal); color: white; font-weight: 600; }
+  .callout strong { font-weight: 600; }
+  .callout em { font-style: italic; opacity: 0.9; }
+
+  /* ---------- Navigation ---------- */
+  .floating-nav {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--navy);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 24px;
+    font-size: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .floating-nav button {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    padding: 3px 8px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .floating-nav button:hover { background: rgba(255,255,255,0.1); }
+  .floating-nav .count {
+    font-weight: 600;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  /* ---------- Print styles ---------- */
+  @media print {
+    body { background: white; padding: 0; }
+    .topbar, .floating-nav, details.notes { display: none; }
+    .slide {
+      box-shadow: none;
+      margin-bottom: 0;
+      border: none;
+      page-break-after: always;
+      page-break-inside: avoid;
+      min-height: auto;
+    }
+    .slide-inner { min-height: auto; padding: 24px 32px; }
+    .deck { padding: 0; max-width: none; }
+  }
+
+  /* ---------- Mobile responsive ---------- */
+  @media (max-width: 900px) {
+    .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .tier-row { grid-template-columns: 1fr; }
+    .slide-inner { padding: 24px 20px; }
+    .title-h { font-size: 38px; }
+    .title-slide, .closing-slide { padding: 40px 24px; }
+    .closing-h { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============= TOP BAR ============= -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-title">Agentic AI for Small Generic Pharma</div>
+    <div class="topbar-sub">Strategy & Build Plan · 21 slides · May 2026</div>
+  </div>
+  <div class="topbar-controls">
+    <select class="ctrl-select" id="jump">
+      <option value="">Jump to slide…</option>
+    </select>
+    <button class="ctrl-btn" onclick="toggleAllNotes()">Toggle all notes</button>
+    <button class="ctrl-btn primary" onclick="window.print()">Print / save as PDF</button>
+  </div>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- ============= SLIDE 1 — TITLE ============= -->
+<div class="slide" data-name="Title">
+  <div class="title-slide">
+    <div class="title-eyebrow">Startup strategy deck</div>
+    <h1 class="title-h">Agentic AI for small<br>generic pharma</h1>
+    <div class="title-sub">Cracking the ANDA-acceleration market for sub-$500M generics</div>
+    <div class="title-meta">Use cases · Architecture · Go-to-market in New Jersey</div>
+    <div class="title-foot">Prepared May 2026 · For internal strategic planning</div>
+  </div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">30 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "I'm building agentic AI for small generic pharma. Specifically, I'm helping companies file ANDAs faster — the regulatory submissions that get a generic drug approved by the FDA. I'll show you why this market is broken, the wedge we found, and how we get to a real business in three years."
+      </div>
+      <div class="tip">Don't read the slide. Land the "why I'm here" in one breath, then move.</div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 2 — EXEC SUMMARY ============= -->
+<div class="slide" data-name="Executive Summary">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 2</div>
+    <h2 class="slide-title">Executive summary</h2>
+    <div class="slide-subtitle">Where to play, why now, and how to win</div>
+    <div class="slide-divider"></div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-label label-teal">The opportunity</div>
+        <div class="card-headline">Small generics ($50M–$500M) face a 32-month average ANDA approval timeline.</div>
+        <div class="card-body">A 6-month delay can turn a blockbuster generic into an unprofitable launch. Veeva is too expensive for this segment. Freyr is service-led and slow.</div>
+      </div>
+      <div class="card">
+        <div class="card-label label-orange">The wedge</div>
+        <div class="card-headline">Start with ANDA Module 1 — the most rule-based part of the submission.</div>
+        <div class="card-body">Two flagship agents: Patent Certification + Labeling Comparison. Each replaces 2–4 weeks of senior expert work with overnight turnaround.</div>
+      </div>
+      <div class="card">
+        <div class="card-label label-navy">The beachhead</div>
+        <div class="card-headline">New Jersey hosts 14 of the world's 20 largest pharma companies.</div>
+        <div class="card-body">26+ generics-focused firms in NJ alone. Targets: Aurolife, Alvogen, Zydus USA, Avet, Cosette, Ajanta. Buyer = VP Regulatory Affairs.</div>
+      </div>
+    </div>
+    <div class="callout info">
+      <strong>Bottom line:</strong> Sell ANDA acceleration as a service ($30K–$50K per ANDA). Not platform SaaS. Not per-seat. Outcome-priced.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Agentic AI for Small Generics Pharma · Strategy Deck</span>
+    <span>2 / 21</span>
+  </div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">90 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Three things to anchor on. One: there are 100+ small generics companies racing to file ANDAs the day a brand drug's patent expires — and the average filing takes 32 months. A six-month delay turns a blockbuster generic into an unprofitable one. Two: the wedge is ANDA Module 1, the most rule-based part of the submission. Two agents — Patent Certification and Labeling Comparison — replace 2 to 4 weeks of senior expert work each. Three: New Jersey is the beachhead. 14 of the world's 20 largest pharma companies are within an hour of where I'm sitting."
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 3 — WHY NOW ============= -->
+<div class="slide" data-name="Why generics, why now">
+  <div class="slide-accent" style="background: var(--orange);"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 3</div>
+    <h2 class="slide-title">Why generics, why now</h2>
+    <div class="slide-subtitle">Market dynamics that make this a $X00M+ opportunity</div>
+    <div class="slide-divider"></div>
+    <div class="grid-4" style="margin-bottom: 24px;">
+      <div class="stat-card teal"><div class="stat-num">$491B</div><div class="stat-label">Global generics market (2024 baseline)</div></div>
+      <div class="stat-card orange"><div class="stat-num">32.8 mo</div><div class="stat-label">Mean ANDA approval time (FY26 Q2)</div></div>
+      <div class="stat-card red"><div class="stat-num">25%</div><div class="stat-label">Application fee lost on Refusal-to-Receive</div></div>
+      <div class="stat-card green"><div class="stat-num">180-day</div><div class="stat-label">Exclusivity at stake for first-to-file</div></div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="col-header warn">What's broken</div>
+        <ul class="clean-list">
+          <li>Manual ANDA prep takes 12–18 months and 5+ FTEs</li>
+          <li>RTRs cost ~$80K + 6-month delay per occurrence</li>
+          <li>Patent certifications need IP counsel + RA + 2–4 weeks</li>
+          <li>Labeling comparisons take senior writers 3–5 days each</li>
+          <li>RLD label changes mid-review trigger scramble responses</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-header info">Why agentic AI works now</div>
+        <ul class="clean-list">
+          <li>Long-context models can ingest entire ANDAs + RLD labels</li>
+          <li>FDA publishes structured data (Orange Book, SPL XML, IID)</li>
+          <li>Module 1 is rule-based — perfect for deterministic agents</li>
+          <li>Output is human-reviewed → no Part 11 validation needed</li>
+          <li>eCTD v4.0 transition (Sept 2024) creates a buying moment</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout navy">A 6-month delay can turn a generic blockbuster into an unprofitable launch. <strong>Speed = revenue.</strong></div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>3 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">90 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "$491 billion market. 32-month average approval time. A 25% fee penalty if you mess up the paperwork badly enough to get a Refusal-to-Receive. And for the first generic to file with a patent challenge, 180 days of market exclusivity worth tens of millions in revenue. The reason agentic AI works now and didn't two years ago: long-context models can ingest entire labels, the FDA publishes structured data we can ground on, and Module 1 is rule-based enough that the agent's output is auditable."
+      </div>
+      <div class="qa">
+        <div class="qa-l">EXPECT THIS QUESTION</div>
+        <div class="qa-q">"Why hasn't Veeva or IQVIA already done this?"</div>
+        <div class="qa-a">Veeva sells to the top 50 — the segment we're targeting is too small for their go-to-market. IQVIA is consulting-led with senior-hour pricing — the unit economics break for a $30K product. The gap is real and durable.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 4 — USE CASE LANDSCAPE ============= -->
+<div class="slide" data-name="Use case landscape">
+  <div class="slide-accent" style="background: var(--orange);"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 4</div>
+    <h2 class="slide-title">The use case landscape</h2>
+    <div class="slide-subtitle">Where to focus: ranked by 'crackability' for a startup</div>
+    <div class="slide-divider"></div>
+    <div class="tier-row">
+      <div class="tier-label" style="background: var(--orange);">
+        <div class="tier-label-name">TIER 1 · Start here</div>
+        <div class="tier-label-sub">Direct revenue impact, narrow scope, measurable</div>
+      </div>
+      <div class="tier-content">
+        <div class="grid-2" style="gap: 6px;">
+          <ul class="clean-list">
+            <li>ANDA Module 1 & 3 drafting agent</li>
+            <li>FDA deficiency response agent (CRL/IR/DRL)</li>
+          </ul>
+          <ul class="clean-list">
+            <li>Orange Book + patent monitoring agent</li>
+            <li>Deviation / OOS / CAPA report drafting agent</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-label" style="background: var(--teal);">
+        <div class="tier-label-name">TIER 2 · Expansion</div>
+        <div class="tier-label-sub">Sell once you're inside the account</div>
+      </div>
+      <div class="tier-content">
+        <div class="grid-2" style="gap: 6px;">
+          <ul class="clean-list">
+            <li>Bioequivalence study design + statistical support</li>
+            <li>Pharmacovigilance ICSR intake + MedWatch drafting</li>
+            <li>Annual Product Review (APR) automation</li>
+          </ul>
+          <ul class="clean-list">
+            <li>Supplier qualification & vendor audit prep</li>
+            <li>Labeling comparison & §viii carve-out agent</li>
+            <li>Stability data trending + OOT prediction</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-label" style="background: var(--navy);">
+        <div class="tier-label-name">TIER 3 · Year 2+</div>
+        <div class="tier-label-sub">Bigger plays once you have data, trust, and scale</div>
+      </div>
+      <div class="tier-content">
+        <div class="grid-2" style="gap: 6px;">
+          <ul class="clean-list">
+            <li>Manufacturing batch record review</li>
+            <li>Real-time release testing support</li>
+          </ul>
+          <ul class="clean-list">
+            <li>Global regulatory intelligence (EMA, ANVISA, HC)</li>
+            <li>Competitive Para IV filing intelligence</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="callout flat">Strategy: pick ONE Tier 1 wedge, win 3–5 customers, then expand into Tier 2 inside those accounts.</div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>4 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">45 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Here's the universe of things agentic AI could do in pharma. Most startups try to boil the ocean. We're not — we're picking one Tier 1 use case and dominating it before we expand. Tier 2 and Tier 3 are the expansion path inside accounts we already own."
+      </div>
+      <div class="tip">Move fast. This slide shows you've thought about the broader landscape, not to dwell on it.</div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 5 — THE WEDGE: MODULE 1 ============= -->
+<div class="slide" data-name="The wedge: Module 1">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 5</div>
+    <h2 class="slide-title">The wedge: ANDA Module 1</h2>
+    <div class="slide-subtitle">Most rule-based, most error-prone, highest ROI</div>
+    <div class="slide-divider"></div>
+    <div class="grid-2" style="gap: 30px;">
+      <div>
+        <div class="col-header warn">What's in Module 1</div>
+        <table class="module1-table">
+          <tr><td class="sec-num">1.1</td><td>Forms (FDA 356h, 3397, 3674)</td><td style="text-align: right;"><span class="pill pill-easy">Easy</span></td></tr>
+          <tr><td class="sec-num">1.2</td><td>Cover Letter</td><td style="text-align: right;"><span class="pill pill-med">Medium</span></td></tr>
+          <tr><td class="sec-num">1.3.3</td><td>Debarment Certification</td><td style="text-align: right;"><span class="pill pill-easy">Easy</span></td></tr>
+          <tr><td class="sec-num">1.3.4</td><td>Financial Certification</td><td style="text-align: right;"><span class="pill pill-easy">Easy</span></td></tr>
+          <tr><td class="sec-num">1.3.5.1</td><td>Patent Information</td><td style="text-align: right;"><span class="pill pill-med">Medium</span></td></tr>
+          <tr><td class="sec-num">1.3.5.2</td><td>Patent Certification</td><td style="text-align: right;"><span class="pill pill-hard">Hard</span></td></tr>
+          <tr><td class="sec-num">1.3.5.3</td><td>Exclusivity Statement</td><td style="text-align: right;"><span class="pill pill-hard">Hard</span></td></tr>
+          <tr><td class="sec-num">1.4</td><td>References (DMF Letters)</td><td style="text-align: right;"><span class="pill pill-med">Medium</span></td></tr>
+          <tr><td class="sec-num">1.12</td><td>Environmental Analysis</td><td style="text-align: right;"><span class="pill pill-med">Medium</span></td></tr>
+          <tr><td class="sec-num">1.14</td><td>Labeling (PI, side-by-side)</td><td style="text-align: right;"><span class="pill pill-hard">Hard</span></td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="col-header info">Why this is the wedge</div>
+        <div class="why-card">
+          <div class="why-card-h">Deterministic</div>
+          <div class="why-card-b">Module 1 follows fixed FDA templates. Less science judgment, more rule-based document assembly.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card-h">High-cost failure mode</div>
+          <div class="why-card-b">RTR costs 25% of fees + 6-month delay. Para IV filers can lose 180-day exclusivity.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card-h">No Part 11 burden</div>
+          <div class="why-card-b">Output is a draft for human RA review. Same posture as Word. No GxP validation v1.</div>
+        </div>
+        <div class="price-strip">
+          <div class="lbl">PRICE POINT</div>
+          <div class="val">$30K–$50K per ANDA, vs. $300K+ at a regulatory CRO.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>5 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">90 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Why Module 1? Three reasons. It's deterministic — the FDA gives you the template. It's high-cost when you fail — RTRs delay you six months and lose you exclusivity. And it's a drafting tool, not a system of record, so we don't need 21 CFR Part 11 validation in version one. We charge $30K to $50K per ANDA versus $300K-plus at a regulatory CRO."
+      </div>
+      <div class="qa">
+        <div class="qa-l">EXPECT THIS QUESTION</div>
+        <div class="qa-q">"How do you handle hallucinations on regulatory filings?"</div>
+        <div class="qa-a">Every output is a draft for human regulatory affairs review. We position it the same way Word is positioned — Word doesn't need GxP validation because a human reviews and approves the output. The agent is decision support, not an automated filer.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 6 — TWO FLAGSHIP AGENTS ============= -->
+<div class="slide" data-name="Two flagship agents">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 6</div>
+    <h2 class="slide-title">Two flagship agents</h2>
+    <div class="slide-subtitle">Build these first. They sell the rest of the product.</div>
+    <div class="slide-divider"></div>
+    <div class="grid-2">
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--navy); color: white; padding: 14px 18px;">
+          <div style="font-size: 11px; letter-spacing: 0.1em; opacity: 0.8;">AGENT 1</div>
+          <div style="font-size: 17px; font-weight: 600; margin-top: 4px;">Patent Certification</div>
+          <div style="font-size: 12px; opacity: 0.85; margin-top: 6px; font-style: italic;">Highest stakes. Highest defensibility.</div>
+        </div>
+        <div style="padding: 16px 18px;">
+          <div style="font-size: 10px; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; margin-bottom: 8px;">WHAT IT DOES</div>
+          <ul class="clean-list" style="font-size: 12px;">
+            <li>For each Orange Book patent on the RLD, recommends Para I/II/III/IV or §viii carve-out</li>
+            <li>Drafts Module 1.3.5.1 + 1.3.5.2 documents</li>
+            <li>Generates Para IV Notice Letter when applicable</li>
+            <li>Estimates 180-day first-to-file exclusivity value</li>
+          </ul>
+          <div style="font-size: 10px; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; margin: 14px 0 6px;">REPLACES TODAY</div>
+          <div style="font-size: 12px; color: var(--text-muted); line-height: 1.55;">IP attorney + Regulatory Director + 2–4 weeks on a 12-patent RLD. $40K–$80K outsourced; agent does it overnight.</div>
+          <div style="margin-top: 14px; padding: 10px 14px; background: var(--orange); color: white; border-radius: 6px; font-size: 11px; font-weight: 600; text-align: center; letter-spacing: 0.04em;">MOAT: Fine-tuned on FDA Para IV history + use code register</div>
+        </div>
+      </div>
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--teal); color: white; padding: 14px 18px;">
+          <div style="font-size: 11px; letter-spacing: 0.1em; opacity: 0.8;">AGENT 2</div>
+          <div style="font-size: 17px; font-weight: 600; margin-top: 4px;">Labeling Comparison</div>
+          <div style="font-size: 12px; opacity: 0.85; margin-top: 6px; font-style: italic;">Highest immediate time savings. Lowest legal risk.</div>
+        </div>
+        <div style="padding: 16px 18px;">
+          <div style="font-size: 10px; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; margin-bottom: 8px;">WHAT IT DOES</div>
+          <ul class="clean-list" style="font-size: 12px;">
+            <li>Pulls latest RLD label (SPL XML) from Drugs@FDA</li>
+            <li>Section-by-section diff: token + semantic</li>
+            <li>Categorizes differences (permitted / carve-out / error)</li>
+            <li>Drafts justification narratives for each difference</li>
+            <li>Verifies §viii carve-out completeness across label</li>
+          </ul>
+          <div style="font-size: 10px; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; margin: 14px 0 6px;">REPLACES TODAY</div>
+          <div style="font-size: 12px; color: var(--text-muted); line-height: 1.55;">Senior regulatory writer, 3–5 days per label. Error-prone — humans miss orphan references.</div>
+          <div style="margin-top: 14px; padding: 10px 14px; background: var(--teal); color: white; border-radius: 6px; font-size: 11px; font-weight: 600; text-align: center; letter-spacing: 0.04em;">MOAT: SPL-native + structured FDA IID + carve-out QA</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout flat"><strong>Synergy:</strong> §viii decisions from Agent 1 feed directly into carve-out completeness checks in Agent 2.</div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>6 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">75 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Patent Certification is highest-stakes — for every patent on the brand drug, the agent decides whether to challenge it, wait for it to expire, or carve out the patented use. Today that's an IP attorney plus a regulatory director plus 2 to 4 weeks. Labeling Comparison is highest immediate value — it does the side-by-side label comparison that takes a senior writer 3 to 5 days. The two agents talk to each other — that's the moat."
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 7 — PATENT CERT ARCHITECTURE ============= -->
+<div class="slide" data-name="Patent Cert Architecture">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 7</div>
+    <h2 class="slide-title">Patent certification — architecture</h2>
+    <div class="slide-subtitle">8 sub-agents working as a pipeline + decision support layer</div>
+    <div class="slide-divider"></div>
+    <div class="grid-4" style="margin-bottom: 14px;">
+      <div class="agent-box"><div class="agent-num">1A</div><div class="agent-name">Orange Book Resolver</div><div class="agent-desc">Pulls patents + exclusivities for the RLD</div></div>
+      <div class="agent-box"><div class="agent-num">1B</div><div class="agent-name">Patent Claim Analyzer</div><div class="agent-desc">Parses claim type: DS / DP / MoU</div></div>
+      <div class="agent-box warn"><div class="agent-num">1C</div><div class="agent-name">Use Code Mapper</div><div class="agent-desc">Maps U-codes to label sections</div></div>
+      <div class="agent-box warn"><div class="agent-num">1D</div><div class="agent-name">Carve-out Viability</div><div class="agent-desc">§viii feasibility + induced infringement</div></div>
+    </div>
+    <div class="grid-4" style="margin-bottom: 18px;">
+      <div class="agent-box danger"><div class="agent-num">1E</div><div class="agent-name">Para IV Strategy</div><div class="agent-desc">Prior art search, invalidity analysis</div></div>
+      <div class="agent-box danger"><div class="agent-num">1F</div><div class="agent-name">First-to-File Analyzer</div><div class="agent-desc">180-day exclusivity value estimate</div></div>
+      <div class="agent-box dark"><div class="agent-num">1G</div><div class="agent-name">Certification Drafter</div><div class="agent-desc">Generates Module 1.3.5.1 + 1.3.5.2</div></div>
+      <div class="agent-box dark"><div class="agent-num">1H</div><div class="agent-name">Notice Letter Drafter</div><div class="agent-desc">Para IV notice to NDA holder + patent owner</div></div>
+    </div>
+    <div class="card flat" style="padding: 14px 18px;">
+      <div style="font-size: 11px; letter-spacing: 0.06em; color: var(--navy); font-weight: 700; margin-bottom: 10px;">TECH STACK</div>
+      <div class="grid-3" style="font-size: 11.5px; color: var(--text-muted); line-height: 1.6;">
+        <div>
+          <div>· Claude Opus 4.x for claim parsing</div>
+          <div>· Python deterministic services for OB</div>
+          <div>· Custom orchestration (no framework)</div>
+        </div>
+        <div>
+          <div>· Patent DBs: PatBase or Patsnap</div>
+          <div>· Google Patents + USPTO PEDS (free tier)</div>
+          <div>· Per-customer pgvector / Pinecone</div>
+        </div>
+        <div>
+          <div>· Quarterly knowledge base updates</div>
+          <div>· Always 'draft for IP counsel review'</div>
+          <div>· Single-tenant VPC per customer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>7 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">60 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Eight sub-agents. The interesting ones are 1c — the Use Code Mapper that reads patent claims and maps them to label sections — and 1e, the Para IV strategy analyzer. Those are where the IP is."
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 8 — DECISION TREE + SAMPLE ============= -->
+<div class="slide" data-name="Decision tree + sample output">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 8</div>
+    <h2 class="slide-title">Patent certification — decision tree</h2>
+    <div class="slide-subtitle">What the agent runs for every Orange Book patent on the RLD</div>
+    <div class="slide-divider"></div>
+    <div class="grid-2" style="gap: 24px;">
+      <div>
+        <div class="col-header info">Per-patent logic</div>
+        <div class="step-row"><div class="step-num green">1</div><div><div class="step-q">Has the patent expired?</div><div class="step-a">Yes → Para II</div></div></div>
+        <div class="step-row"><div class="step-num amber">2</div><div><div class="step-q">Pediatric exclusivity extension?</div><div class="step-a">Adjust expiration date</div></div></div>
+        <div class="step-row"><div class="step-num green">3</div><div><div class="step-q">Customer launches after expiration?</div><div class="step-a">Yes → Para III</div></div></div>
+        <div class="step-row"><div class="step-num">4</div><div><div class="step-q">What patent type?</div><div class="step-a">DS / DP / MoU classification</div></div></div>
+        <div class="step-row"><div class="step-num orange">5</div><div><div class="step-q">Method-of-use? Carve-out viable?</div><div class="step-a">Yes → §viii statement</div></div></div>
+        <div class="step-row"><div class="step-num red">6</div><div><div class="step-q">If not viable: Para IV analysis</div><div class="step-a">Invalidity / non-infringement</div></div></div>
+        <div class="step-row"><div class="step-num navy">7</div><div><div class="step-q">First-to-file available?</div><div class="step-a">180-day exclusivity</div></div></div>
+      </div>
+      <div>
+        <div class="col-header info">Sample output (12-patent RLD)</div>
+        <div class="console">
+<span class="head"><b>PATENT 8,123,456 (DS)</b></span><br>
+<span class="dim">Expires: 2031-04-12</span><br>
+<span class="ok">→ RECOMMEND: Paragraph III</span><br>
+<br>
+<span class="head"><b>PATENT 9,234,567 (MoU, U-1789)</b></span><br>
+<span class="dim">Use code: MDD with anxiety</span><br>
+<span class="ok">→ RECOMMEND: §viii carve-out</span><br>
+Carve-out feasibility: 8/10<br>
+<span class="warn">Induced infringement risk: Medium</span><br>
+<br>
+<span class="head"><b>PATENT 9,345,678 (DP)</b></span><br>
+<span class="err">→ RECOMMEND: Para IV</span><br>
+Argument: 103 obviousness<br>
+<span class="ok">FTF status: AVAILABLE</span><br>
+<span class="ok">Est. exclusivity value: $42M</span><br>
+<br>
+<span class="dim">─────────────────────────</span><br>
+<span style="color: #6bd1d9;"><b>EARLIEST LAUNCH: 2027-Q3</b></span><br>
+<span class="dim">vs. 2031-04-12 without challenge</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>8 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">90 sec — this is your demo moment</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Here's what the output actually looks like for a 12-patent drug. The agent recommends Para III for the composition patent — wait it out. Section viii skinny-label carve-out for the method-of-use patent. And Para IV invalidity challenge for the formulation patent — with first-to-file status confirmed and an estimated $42M exclusivity value. Earliest launch goes from 2031 to 2027 Q3. That's the value prop in one slide."
+      </div>
+      <div class="tip">If you only have 60 seconds for product, skip slide 7 and spend it all on this slide.</div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 9 — LABELING ARCHITECTURE ============= -->
+<div class="slide" data-name="Labeling architecture">
+  <div class="slide-accent" style="background: var(--green);"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 9</div>
+    <h2 class="slide-title">Labeling comparison — architecture</h2>
+    <div class="slide-subtitle">9 sub-agents covering side-by-side, justifications, and SPL output</div>
+    <div class="slide-divider"></div>
+    <div class="grid-3" style="margin-bottom: 12px;">
+      <div class="agent-box"><div class="agent-num">2A</div><div class="agent-name">RLD Label Extractor</div><div class="agent-desc">Pulls SPL XML from Drugs@FDA</div></div>
+      <div class="agent-box"><div class="agent-num">2B</div><div class="agent-name">Generic Label Ingester</div><div class="agent-desc">Parses customer's proposed label</div></div>
+      <div class="agent-box"><div class="agent-num">2C</div><div class="agent-name">Section Differ</div><div class="agent-desc">Token + semantic diff using Claude</div></div>
+    </div>
+    <div class="grid-3" style="margin-bottom: 12px;">
+      <div class="agent-box warn"><div class="agent-num">2D</div><div class="agent-name">Justification Drafter</div><div class="agent-desc">FDA-acceptable narrative for each</div></div>
+      <div class="agent-box warn"><div class="agent-num">2E</div><div class="agent-name">Carve-out Consistency</div><div class="agent-desc">Verifies §viii completeness</div></div>
+      <div class="agent-box warn"><div class="agent-num">2F</div><div class="agent-name">Visual Comparison Gen</div><div class="agent-desc">Side-by-side Word + PDF output</div></div>
+    </div>
+    <div class="grid-3" style="margin-bottom: 18px;">
+      <div class="agent-box success"><div class="agent-num">2G</div><div class="agent-name">Container Label Comparator</div><div class="agent-desc">Uses Claude vision on artwork</div></div>
+      <div class="agent-box success"><div class="agent-num">2H</div><div class="agent-name">SPL Generator</div><div class="agent-desc">FDA-compliant XML output</div></div>
+      <div class="agent-box success"><div class="agent-num">2I</div><div class="agent-name">RLD Change Monitor</div><div class="agent-desc">Daily watcher for in-flight ANDAs</div></div>
+    </div>
+    <div class="callout navy">
+      <strong style="color: var(--orange);">WHY SPL-NATIVE MATTERS</strong><br>
+      <span style="font-size: 12px;">FDA labeling submissions have been required in SPL XML since 2005. Working from structured XML is dramatically more reliable than PDF parsing.</span>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>9 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">60 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "The labeling agent is built on the FDA's structured product labeling XML — that's the format the FDA has required since 2005, but nobody else builds on it as a primary input."
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 10 — LABELING SAMPLE ============= -->
+<div class="slide" data-name="Labeling sample output">
+  <div class="slide-accent" style="background: var(--green);"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 10</div>
+    <h2 class="slide-title">Labeling comparison — sample output</h2>
+    <div class="slide-subtitle">What the customer actually receives</div>
+    <div class="slide-divider"></div>
+    <div class="console">
+<span class="head"><b>LABELING COMPARISON REPORT — [Generic] vs [RLD]</b></span><br>
+<span class="dim">RLD Version: 2026-03-14   |   Differences identified: 47</span><br>
+<span class="dim">─────────────────────────────────────────────────────────</span><br>
+<br>
+<span class="warn"><b>§ 1  INDICATIONS AND USAGE     [!] CARVE-OUT (verified)</b></span><br>
+&nbsp;&nbsp;RLD:     'Indicated for treatment of A, B, and C'<br>
+&nbsp;&nbsp;Generic: 'Indicated for treatment of A and B'<br>
+<span class="ok">&nbsp;&nbsp;Justification: §viii on patent 9,234,567 (use code U-1789)</span><br>
+<span class="ok">&nbsp;&nbsp;[OK] No orphan refs to indication C in remaining sections</span><br>
+<br>
+<span class="ok"><b>§ 2  DOSAGE AND ADMINISTRATION    [OK] Identical to RLD</b></span><br>
+<br>
+<span class="warn"><b>§ 11  DESCRIPTION    4 differences (3 permitted, 1 needs justification)</b></span><br>
+&nbsp;&nbsp;[!] Inactive ingredient: microcrystalline cellulose replaces lactose<br>
+<span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;Auto-drafted justification: IID precedent at Y% w/w; BE study cited.</span><br>
+<br>
+<span class="err"><b>§ 17  PATIENT COUNSELING          [X] ERROR DETECTED</b></span><br>
+<span class="err">&nbsp;&nbsp;Section references treatment of indication C (carved out per §viii)</span><br>
+<span class="err">&nbsp;&nbsp;RECOMMENDATION: Remove or rewrite for skinny label scope</span><br>
+<br>
+<span class="warn"><b>CONTAINER LABEL — PRINCIPAL DISPLAY PANEL</b></span><br>
+<span class="err">&nbsp;&nbsp;[X] Statement of identity: 8pt font (21 CFR 201.10 requires ≥10pt)</span><br>
+<span class="warn">&nbsp;&nbsp;[!] Storage statement differs from RLD — recommend exact match</span>
+    </div>
+    <div class="callout flat">Replaces 3–5 days of senior writer time. Catches the orphan-reference errors humans miss.</div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>10 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">60 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "The sample output catches the orphan-reference error at the bottom — Section 17 still mentions an indication that was carved out. That's the kind of mistake humans miss, and it's the kind of mistake that triggers an FDA Refusal-to-Receive."
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 11 — TECH STACK ============= -->
+<div class="slide" data-name="Tech stack">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 11</div>
+    <h2 class="slide-title">Recommended tech stack</h2>
+    <div class="slide-subtitle">Production-grade, single-tenant, regulated-industry friendly</div>
+    <div class="slide-divider"></div>
+    <div style="display: grid; gap: 10px;">
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px;">
+        <div class="tier-label" style="background: var(--teal);"><div class="tier-label-name">Models</div></div>
+        <div class="tier-content" style="font-size: 12px;">
+          · Claude Opus 4.x — claim parsing, label semantic diff, complex drafting<br>
+          · Claude Sonnet — high-volume document tasks · Claude Haiku — classification, form filling
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px;">
+        <div class="tier-label" style="background: var(--orange);"><div class="tier-label-name">Orchestration</div></div>
+        <div class="tier-content" style="font-size: 12px;">
+          · Custom Python with the Anthropic SDK · Frameworks add abstractions you don't need<br>
+          · LangGraph or CrewAI optional · Single orchestrator agent decomposes intent into sub-tasks
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px;">
+        <div class="tier-label" style="background: var(--navy);"><div class="tier-label-name">Data & retrieval</div></div>
+        <div class="tier-content" style="font-size: 12px;">
+          · pgvector or Pinecone — per-customer indices · Two indices: customer docs + public FDA data<br>
+          · Daily ingestion: Orange Book, Drugs@FDA, FDA guidance, USPTO PEDS
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px;">
+        <div class="tier-label" style="background: var(--red);"><div class="tier-label-name">Document handling</div></div>
+        <div class="tier-content" style="font-size: 12px;">
+          · PDF: pdfplumber + Claude vision · Word: python-docx with templates<br>
+          · SPL: native XML (HL7 schema) · eCTD: partner with Lorenz or Extedo (don't rebuild)
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px;">
+        <div class="tier-label" style="background: var(--green);"><div class="tier-label-name">Deployment</div></div>
+        <div class="tier-content" style="font-size: 12px;">
+          · Single-tenant per customer (VPC isolation = trust feature) · AWS or Azure<br>
+          · SSO + audit logging from day one · Treat regulatory data as confidential IP
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>11 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">45 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Single-tenant per customer — that's a feature, not a bug, in regulated industries. We partner with the existing eCTD publishers like Lorenz instead of rebuilding them. Anthropic for the heavy reasoning, smaller models for classification."
+      </div>
+      <div class="tip">Move fast. Most investors don't want stack detail — only your technical investors will probe here.</div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 12 — 12-MONTH BUILD PLAN ============= -->
+<div class="slide" data-name="12-month build plan">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 12</div>
+    <h2 class="slide-title">12-month build plan</h2>
+    <div class="slide-subtitle">Phased rollout from free trojan horse to full platform</div>
+    <div class="slide-divider"></div>
+    <div class="grid-4">
+      <div class="phase-card">
+        <div class="phase-head" style="background: var(--teal);"><div class="phase-when">MONTHS 1–2</div></div>
+        <div class="phase-body">
+          <div class="phase-title">Trojan horse</div>
+          <div class="phase-what">Build Orange Book Monitor + RLD Label Watcher. Slack/email alerts. Free or $500/mo.</div>
+          <div class="phase-goal-l" style="color: var(--teal);">GOAL</div>
+          <div class="phase-goal">5–10 pilot accounts engaged with no friction.</div>
+        </div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head" style="background: var(--orange);"><div class="phase-when">MONTHS 3–5</div></div>
+        <div class="phase-body">
+          <div class="phase-title">First paid wedge</div>
+          <div class="phase-what">Add Labeling Comparison v1 + Cover Letter Drafting. 'Module 1 starter kit'.</div>
+          <div class="phase-goal-l" style="color: var(--orange);">GOAL</div>
+          <div class="phase-goal">$10K–$15K per ANDA. 3 paying customers.</div>
+        </div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head" style="background: var(--red);"><div class="phase-when">MONTHS 6–9</div></div>
+        <div class="phase-body">
+          <div class="phase-title">Full Module 1</div>
+          <div class="phase-what">Add Patent Cert Agent (full), Carve-out checker, eCTD validator integration.</div>
+          <div class="phase-goal-l" style="color: var(--red);">GOAL</div>
+          <div class="phase-goal">$30K–$50K per ANDA. 8 customers. Series A ready.</div>
+        </div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-head" style="background: var(--navy);"><div class="phase-when">MONTHS 10–12</div></div>
+        <div class="phase-body">
+          <div class="phase-title">Lock-in</div>
+          <div class="phase-what">Orchestrator + dashboards + Part 11 audit trails + QMS/RIM integrations.</div>
+          <div class="phase-goal-l" style="color: var(--navy);">GOAL</div>
+          <div class="phase-goal">Multi-year contracts. Tier 2 expansion.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout flat">Each phase is independently sellable. You don't need months 6–12 to charge real money in months 3–5.</div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>12 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">75 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "We don't build everything before charging. Months 1 to 2 is a free Orange Book monitor as a trojan horse — gets us in 5 to 10 accounts. Months 3 to 5 is the first paid wedge. Months 6 to 9 is the full Module 1 platform. Months 10 to 12 is lock-in. Each phase is independently sellable."
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 13 — NJ TARGETS ============= -->
+<div class="slide" data-name="NJ target accounts">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 13</div>
+    <h2 class="slide-title">New Jersey target accounts</h2>
+    <div class="slide-subtitle">26+ generics-focused firms in 'The Medicine Chest of the World'</div>
+    <div class="slide-divider"></div>
+    <div style="font-size: 12px; font-weight: 600; color: var(--navy); margin-bottom: 10px;">Primary targets — sub-$500M revenue, 100–600 employees, active ANDA pipelines</div>
+    <table class="data-table">
+      <tr><th style="width: 26%;">Company</th><th style="width: 18%;">NJ Location</th><th>Profile</th></tr>
+      <tr><td class="name">Aurolife Pharma</td><td>South Brunswick</td><td>Subsidiary of Aurobindo. 100K sq ft FDA facility. Oral solid dosage focus.</td></tr>
+      <tr><td class="name">Alvogen</td><td>Montville</td><td>50+ products on market. Expanding into complex inhalation and 505(b)(2).</td></tr>
+      <tr><td class="name">Zydus Pharmaceuticals USA</td><td>Pennington</td><td>5th largest unbranded generics in US. 287 ANDA approvals.</td></tr>
+      <tr><td class="name">Avet Pharmaceuticals</td><td>East Brunswick</td><td>Cardiovascular, anti-infectives, pain management generics.</td></tr>
+      <tr><td class="name">Cosette Pharmaceuticals</td><td>South Plainfield</td><td>Branded + generics. Dermatology, oral liquids.</td></tr>
+      <tr><td class="name">Ajanta Pharma USA</td><td>Bridgewater</td><td>Generic drugs subsidiary of Ajanta Pharma Ltd (India).</td></tr>
+      <tr><td class="name">Lupin Pharmaceuticals</td><td>Somerset</td><td>US arm of Lupin. Strong generics + specialty pipeline.</td></tr>
+      <tr><td class="name">Glenmark Pharmaceuticals</td><td>Mahwah</td><td>Specialty + generics. Active ANDA pipeline.</td></tr>
+      <tr><td class="name">Dr. Reddy's Laboratories</td><td>Princeton</td><td>Major generics player. NJ HQ for US operations.</td></tr>
+      <tr><td class="name">Hikma Pharmaceuticals</td><td>Berkeley Heights</td><td>Injectables-heavy generics portfolio.</td></tr>
+    </table>
+    <div class="callout flat">Plus: Amneal (Bridgewater), Bausch Health (Bridgewater), Aceto, Apicore, Akrimax, and 10+ more.</div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>13 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">60 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "The NJ pharma corridor isn't a coincidence — it's why I'm building this from here. 26 generics-focused firms in this state alone. All sub-$500M revenue, all running active ANDA pipelines, all 30 minutes from my office. I'm not going to need a six-figure travel budget to land the first ten customers."
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 14 — GTM STRATEGY ============= -->
+<div class="slide" data-name="Go-to-market strategy">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 14</div>
+    <h2 class="slide-title">Go-to-market strategy</h2>
+    <div class="slide-subtitle">How to crack 3 paying customers in 6 months</div>
+    <div class="slide-divider"></div>
+    <div class="grid-2" style="margin-bottom: 12px;">
+      <div class="quad-card">
+        <div class="quad-head" style="background: var(--teal);">Buyer profile</div>
+        <div class="quad-body">
+          <ul class="clean-list">
+            <li>VP Regulatory Affairs (primary)</li>
+            <li>VP Quality (secondary)</li>
+            <li>Often same person who feels pain & signs check</li>
+            <li>Small pharma rarely has CTO/CIO — don't pitch IT</li>
+            <li>Decision cycle: 6–12 weeks, not 6 months</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quad-card">
+        <div class="quad-head" style="background: var(--orange);">Pricing model</div>
+        <div class="quad-body">
+          <ul class="clean-list">
+            <li>Per-ANDA fee: $30K–$50K (vs. $300K+ at CRO)</li>
+            <li>Outcome-based: pay when filing accelerates</li>
+            <li>Avoid per-seat SaaS — they don't think that way</li>
+            <li>Free trial: Orange Book monitoring (no GxP risk)</li>
+            <li>Multi-year discount for full Module 1 platform</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="quad-card">
+        <div class="quad-head" style="background: var(--navy);">Channels & events</div>
+        <div class="quad-body">
+          <ul class="clean-list">
+            <li>BioNJ — sponsor regulatory roundtables</li>
+            <li>DIA Generic Drugs Forum (annual, NJ-heavy)</li>
+            <li>Rutgers Pharmaceutical Industry Fellowship alumni</li>
+            <li>NJ Innovation Hub at HELIX (New Brunswick)</li>
+            <li>LinkedIn outreach to VP Regulatory titles</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quad-card">
+        <div class="quad-head" style="background: var(--red);">Message & proof</div>
+        <div class="quad-body">
+          <ul class="clean-list">
+            <li>Lead with time-to-file, not AI buzzwords</li>
+            <li>Case study: first 3 customers' ANDA timelines</li>
+            <li>First-cycle approval = your headline KPI</li>
+            <li>Always demo with their real RLD</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="callout action"><strong>COLD EMAIL HOOK:</strong> "Cutting [Company]'s next ANDA from filing-ready to filed in 2 weeks instead of 6."</div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>14 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">75 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "The buyer is the VP of Regulatory Affairs. Not the CIO — small pharma rarely has one. Pricing is per-ANDA, not per-seat — that's how this buyer thinks. We meet them at BioNJ events and the DIA Generic Drugs Forum. The cold email subject line that's working: 'Cutting your next ANDA from filing-ready to filed in two weeks instead of six.' No AI buzzwords."
+      </div>
+      <div class="qa">
+        <div class="qa-l">EXPECT THIS QUESTION</div>
+        <div class="qa-q">"How long is the sales cycle?"</div>
+        <div class="qa-a">6 to 12 weeks for a paid pilot. 4 to 6 months for a multi-ANDA contract. Faster than enterprise SaaS because the buyer has direct revenue accountability.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 15 — COMPETITIVE LANDSCAPE ============= -->
+<div class="slide" data-name="Competitive landscape">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 15</div>
+    <h2 class="slide-title">Competitive landscape</h2>
+    <div class="slide-subtitle">Where the gap is — and why it's defensible</div>
+    <div class="slide-divider"></div>
+    <table class="data-table" style="margin-bottom: 18px;">
+      <tr><th style="width: 22%;">Player</th><th style="width: 18%;">Model</th><th style="width: 35%;">How they show up</th><th>Your angle</th></tr>
+      <tr><td class="name">Veeva Vault RIM</td><td>Platform / SaaS</td><td>Owns RIM at the top 50. Too expensive for sub-$500M generics.</td><td style="color: var(--green); font-weight: 600;">Not direct competitor at this segment</td></tr>
+      <tr><td class="name">Freyr Solutions</td><td>Service-led + AI</td><td>Pitching Freya.Fusion as 60% timeline reduction. CRO-style — slow to deploy.</td><td style="color: var(--orange); font-weight: 600;">Compete on speed-to-value and price</td></tr>
+      <tr><td class="name">IQVIA / Certara / ProPharma</td><td>CRO services</td><td>Project-based regulatory consulting. Senior-hour pricing.</td><td style="color: var(--orange); font-weight: 600;">Compete on scalability and predictability</td></tr>
+      <tr><td class="name">In-house RA + offshore CROs</td><td>Status quo</td><td>Most small generics still do this manually with India-based vendors.</td><td style="color: var(--red); font-weight: 600;">Compete on quality + first-cycle approval rate</td></tr>
+    </table>
+    <div class="callout navy">
+      <strong style="color: var(--orange);">YOUR DEFENSIBLE MOATS</strong><br>
+      <span style="font-size: 12px; line-height: 1.7;">
+        <strong>(1)</strong> Proprietary fine-tuning on FDA correspondence + 483s + warning letters &nbsp;
+        <strong>(2)</strong> Workflow integrations with batch record / stability systems &nbsp;
+        <strong>(3)</strong> The trust contract — small pharma shares regulatory data with ONE partner, not five
+      </span>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>15 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">60 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Four players. Veeva is too expensive for our segment. Freyr is service-led with AI claims tacked on. IQVIA charges by the senior hour. Status quo is in-house plus offshore vendors. The moat we're building: proprietary fine-tuning on FDA correspondence, deep workflow integrations, and the trust contract — small pharma will share regulatory data with one partner, not five."
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 16 — RISKS ============= -->
+<div class="slide" data-name="Risks & mitigations">
+  <div class="slide-accent" style="background: var(--red);"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 16</div>
+    <h2 class="slide-title">Risks & mitigations</h2>
+    <div class="slide-subtitle">What can kill this — and how to handle it</div>
+    <div class="slide-divider"></div>
+    <div class="grid-2" style="gap: 12px;">
+      <div class="risk-card">
+        <div class="risk-h">Hallucinations on regulatory output</div>
+        <div class="risk-what">Incorrect Para IV recommendation could trigger litigation or lose exclusivity.</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Position as 'draft for human review.' Always require RA + IP counsel sign-off.</div>
+      </div>
+      <div class="risk-card warn">
+        <div class="risk-h">Slow procurement at small pharma</div>
+        <div class="risk-what">Even small companies have 8–14 week procurement cycles for new vendors.</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Free Orange Book monitor as land-step. Build relationships first.</div>
+      </div>
+      <div class="risk-card warn">
+        <div class="risk-h">FDA changing the rules</div>
+        <div class="risk-what">eCTD v4.0 transition, Use Code reform, AI guidance evolving.</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Configurable knowledge base. Quarterly review with regulatory advisor.</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-h">Big incumbents copying the playbook</div>
+        <div class="risk-what">Veeva, IQVIA, or FDA-adjacent CROs could build similar agents.</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Move fast. Win the trust contract. Stay narrowly vertical.</div>
+      </div>
+      <div class="risk-card warn">
+        <div class="risk-h">Customer data sensitivity</div>
+        <div class="risk-what">Customer regulatory dossiers are highly confidential pre-filing.</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Single-tenant from day one. SOC 2 Type II within year one.</div>
+      </div>
+      <div class="risk-card warn">
+        <div class="risk-h">Validation creep</div>
+        <div class="risk-what">Customers may demand Part 11 / GxP validation before purchase.</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Stay 'drafting tool' positioning v1. Validated mode for v2.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>16 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">60 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Six risks. The two I lose sleep over: hallucinations on Para IV recommendations, which is why every output requires IP counsel sign-off. And big incumbents copying us — which is why we move fast and stay narrowly vertical."
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 17 — 90-DAY MVP ============= -->
+<div class="slide" data-name="90-day MVP">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 17</div>
+    <h2 class="slide-title">The 90-day MVP</h2>
+    <div class="slide-subtitle">Concrete next steps to start tomorrow</div>
+    <div class="slide-divider"></div>
+    <div class="grid-3">
+      <div class="phase-card" style="border-top: 4px solid var(--teal);">
+        <div class="phase-body">
+          <div style="font-size: 11px; letter-spacing: 0.08em; color: var(--teal); font-weight: 700; margin-bottom: 6px;">DAYS 1–30</div>
+          <div class="phase-title">Patent Cert v0.1</div>
+          <ul class="clean-list">
+            <li>Build Sub-agent 1a: Orange Book Resolver</li>
+            <li>Build Sub-agent 1g: Certification Drafter</li>
+            <li>Hardcoded scope: Para II/III only</li>
+            <li>Demo to 3 NJ customers as 'auto-generate Module 1.3.5'</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-card" style="border-top: 4px solid var(--orange);">
+        <div class="phase-body">
+          <div style="font-size: 11px; letter-spacing: 0.08em; color: var(--orange); font-weight: 700; margin-bottom: 6px;">DAYS 31–60</div>
+          <div class="phase-title">Labeling Comp v0.1</div>
+          <ul class="clean-list">
+            <li>Build Sub-agents 2a, 2b, 2c, 2f</li>
+            <li>Output: side-by-side comparison + categorization</li>
+            <li>Demo as '3 days → 1 hour for labeling'</li>
+            <li>Capture wins as case-study material</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-card" style="border-top: 4px solid var(--red);">
+        <div class="phase-body">
+          <div style="font-size: 11px; letter-spacing: 0.08em; color: var(--red); font-weight: 700; margin-bottom: 6px;">DAYS 61–90</div>
+          <div class="phase-title">Integration & carve-out</div>
+          <ul class="clean-list">
+            <li>Add Sub-agent 2e: Carve-out Consistency Checker</li>
+            <li>Add Sub-agent 1c: Use Code Mapper</li>
+            <li>End-to-end §viii workflow demo</li>
+            <li>Convert at least 1 pilot to paid contract</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="callout action">After 90 days: 2+ pilot customers, defensible product, clear seed-round narrative.</div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>17 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">45 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Concrete next 90 days. Days 1 to 30 — Patent Cert v0.1 with Para II and III only. Days 31 to 60 — Labeling Comparison v0.1. Days 61 to 90 — the integration story, which closes our first paid contract. After 90 days we have two pilot customers and a defensible product."
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 18 — FINANCIALS ============= -->
+<div class="slide" data-name="Financial projections">
+  <div class="slide-accent" style="background: var(--green);"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 18</div>
+    <h2 class="slide-title">Financial projections</h2>
+    <div class="slide-subtitle">3-year base case · conservative customer ramp · project-cycle revenue</div>
+    <div class="slide-divider"></div>
+    <div class="grid-4" style="margin-bottom: 18px;">
+      <div class="stat-card teal"><div style="font-size: 10px; letter-spacing: 0.06em; color: var(--text-faint); margin-bottom: 4px; font-weight: 600;">YEAR 1</div><div class="stat-num" style="font-size: 24px;">$0.4M</div><div class="stat-label">ARR · 3 paying customers</div></div>
+      <div class="stat-card orange"><div style="font-size: 10px; letter-spacing: 0.06em; color: var(--text-faint); margin-bottom: 4px; font-weight: 600;">YEAR 2</div><div class="stat-num" style="font-size: 24px;">$2.8M</div><div class="stat-label">ARR · 12 paying customers</div></div>
+      <div class="stat-card green"><div style="font-size: 10px; letter-spacing: 0.06em; color: var(--text-faint); margin-bottom: 4px; font-weight: 600;">YEAR 3</div><div class="stat-num" style="font-size: 24px;">$9.5M</div><div class="stat-label">ARR · 28 paying customers</div></div>
+      <div class="stat-card teal"><div style="font-size: 10px; letter-spacing: 0.06em; color: var(--text-faint); margin-bottom: 4px; font-weight: 600;">YEAR 3</div><div class="stat-num" style="font-size: 24px;">78%</div><div class="stat-label">Gross margin · software-like</div></div>
+    </div>
+    <table class="data-table" style="margin-bottom: 14px;">
+      <tr><th style="width: 32%;">P&L summary ($K)</th><th class="num">Year 1</th><th class="num">Year 2</th><th class="num">Year 3</th><th class="num" style="width: 12%;">CAGR</th></tr>
+      <tr><td>Paying customers (EOY)</td><td class="num">3</td><td class="num">12</td><td class="num">28</td><td class="num" style="color: var(--green); font-weight: 600;">+205%</td></tr>
+      <tr><td>ANDAs delivered (annual)</td><td class="num">12</td><td class="num">62</td><td class="num">165</td><td class="num" style="color: var(--green); font-weight: 600;">+271%</td></tr>
+      <tr><td>Avg revenue per ANDA</td><td class="num">$32K</td><td class="num">$42K</td><td class="num">$55K</td><td class="num" style="color: var(--green); font-weight: 600;">+31%</td></tr>
+      <tr class="hl pos"><td><strong>Revenue</strong></td><td class="num">$385</td><td class="num">$2,820</td><td class="num">$9,475</td><td class="num">+395%</td></tr>
+      <tr><td>COGS (compute, partners, CSM)</td><td class="num">$165</td><td class="num">$705</td><td class="num">$2,085</td><td class="num"></td></tr>
+      <tr class="hl"><td><strong>Gross profit</strong></td><td class="num">$220</td><td class="num">$2,115</td><td class="num">$7,390</td><td class="num"></td></tr>
+      <tr><td>Gross margin %</td><td class="num">57%</td><td class="num">75%</td><td class="num">78%</td><td class="num"></td></tr>
+      <tr><td>OpEx (team, sales, infra)</td><td class="num">$1,750</td><td class="num">$3,400</td><td class="num">$5,800</td><td class="num"></td></tr>
+      <tr class="hl"><td><strong>EBITDA</strong></td><td class="num" style="color: var(--red);">($1,530)</td><td class="num" style="color: var(--red);">($1,285)</td><td class="num" style="color: var(--green);">$1,590</td><td class="num"></td></tr>
+    </table>
+    <div class="grid-2">
+      <div style="background: var(--navy); color: white; padding: 12px 16px; border-radius: 8px;">
+        <div style="font-size: 10px; letter-spacing: 0.08em; color: var(--orange); font-weight: 700; margin-bottom: 6px;">FUNDING ASK</div>
+        <div style="font-size: 13px; line-height: 1.5;">$3.5M Seed (24-month runway) → Series A on Y2 traction at $20–30M post.</div>
+      </div>
+      <div class="card flat" style="padding: 12px 16px;">
+        <div style="font-size: 10px; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; margin-bottom: 6px;">KEY ASSUMPTIONS</div>
+        <div style="font-size: 11.5px; color: var(--text-muted); line-height: 1.6;">3–6 ANDAs/year per customer · 80%+ logo retention by Y2 · Pricing rises with module ship · NJ Y1, national Y2</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>18 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">2 min</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Three customers in Year 1, twelve in Year 2, twenty-eight in Year 3. ARR goes $0.4M to $2.8M to $9.5M. Gross margin lifts from 57% in Year 1 — heavy onboarding work — to 78% in Year 3. EBITDA flips positive in Year 3. We're raising $3.5M for 24 months of runway, then a Series A on Year 2 traction."
+      </div>
+      <div class="qa">
+        <div class="qa-l">EXPECT THESE QUESTIONS</div>
+        <div class="qa-q">"What's your CAC and LTV?"</div>
+        <div class="qa-a">CAC ~$25K through founder-led sales in NJ Year 1, scaling to ~$60K with a sales team in Year 3. LTV at base case is $400K-plus per logo. Payback under 6 months once Patent Cert ships.</div>
+        <div class="qa-q" style="margin-top: 8px;">"Why does ARR per ANDA grow from $32K to $55K?"</div>
+        <div class="qa-a">As more modules ship, we capture more of the workflow per ANDA. Year 1 we sell labeling-only. Year 3 we sell the full Module 1 with patent certification, carve-out checking, and Notice Letter drafting bundled.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 19 — TEAM PLAN ============= -->
+<div class="slide" data-name="Team plan">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 19</div>
+    <h2 class="slide-title">Team plan</h2>
+    <div class="slide-subtitle">Domain credibility + AI engineering. Both are non-negotiable.</div>
+    <div class="slide-divider"></div>
+    <div style="font-size: 11px; letter-spacing: 0.08em; color: var(--orange); font-weight: 700; margin-bottom: 10px;">PHASE 1 · FOUNDING TEAM (months 0–6, $3.5M seed)</div>
+    <div class="grid-5" style="margin-bottom: 18px;">
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--navy); color: white; padding: 8px 10px; font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 40px; display: flex; align-items: center;">CEO / Founder</div>
+        <div style="padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">Product + GTM + fundraising. Pharma, regtech, or vertical AI background.</div>
+      </div>
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--navy); color: white; padding: 8px 10px; font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 40px; display: flex; align-items: center;">CTO / Founder</div>
+        <div style="padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">AI engineering lead. Built production LLM pipelines. Owns architecture.</div>
+      </div>
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--orange); color: white; padding: 8px 10px; font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 40px; display: flex; align-items: center;">Head of Regulatory (co-founder/advisor)</div>
+        <div style="padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">Ex-VP RA at a generics co. OR ex-FDA OGD reviewer. Non-negotiable.</div>
+      </div>
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--teal); color: white; padding: 8px 10px; font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 40px; display: flex; align-items: center;">Founding Engineer</div>
+        <div style="padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">Full-stack + LLM application. Owns data pipelines + document processing.</div>
+      </div>
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--teal); color: white; padding: 8px 10px; font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 40px; display: flex; align-items: center;">Founding Engineer</div>
+        <div style="padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">Backend + integrations. Owns Orange Book, USPTO, Drugs@FDA pipelines.</div>
+      </div>
+    </div>
+    <div style="font-size: 11px; letter-spacing: 0.08em; color: var(--teal); font-weight: 700; margin-bottom: 10px;">PHASE 2 · YEAR 1 HIRES (months 6–12, +5 heads → 10 total)</div>
+    <div class="grid-5" style="margin-bottom: 18px;">
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--text-muted); color: white; padding: 8px 10px; font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 40px; display: flex; align-items: center;">Customer Success (pharma)</div>
+        <div style="padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">Onboards customers. Speaks RA fluently. Often ex-RA Director.</div>
+      </div>
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--text-muted); color: white; padding: 8px 10px; font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 40px; display: flex; align-items: center;">Senior ML Engineer</div>
+        <div style="padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">Fine-tuning, eval pipelines, model selection. Quality benchmarks.</div>
+      </div>
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--text-muted); color: white; padding: 8px 10px; font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 40px; display: flex; align-items: center;">RegOps Associate</div>
+        <div style="padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">Validates outputs vs. ground truth. Builds the eval dataset moat.</div>
+      </div>
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--text-muted); color: white; padding: 8px 10px; font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 40px; display: flex; align-items: center;">Founding AE</div>
+        <div style="padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">Closes deals. From Veeva / IQVIA / regulatory CRO background.</div>
+      </div>
+      <div class="card" style="padding: 0;">
+        <div style="background: var(--text-muted); color: white; padding: 8px 10px; font-size: 11px; font-weight: 600; line-height: 1.3; min-height: 40px; display: flex; align-items: center;">Engineer #3 (frontend)</div>
+        <div style="padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.5;">Customer-facing dashboards, comparison viewers, audit trails.</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card flat" style="padding: 12px 16px;">
+        <div style="font-size: 10px; letter-spacing: 0.06em; color: var(--navy); font-weight: 700; margin-bottom: 8px;">ADVISORY BOARD (fractional + equity)</div>
+        <ul class="clean-list" style="font-size: 11.5px;">
+          <li>IP attorney experienced in Hatch-Waxman litigation</li>
+          <li>Ex-FDA OGD reviewer (ANDA review process expertise)</li>
+          <li>Ex-CEO/VP Regulatory at top-10 generics company</li>
+          <li>Ex-Veeva or IQVIA exec (commercial playbook)</li>
+        </ul>
+      </div>
+      <div style="background: var(--navy); color: white; padding: 12px 16px; border-radius: 8px;">
+        <div style="font-size: 10px; letter-spacing: 0.06em; color: var(--orange); font-weight: 700; margin-bottom: 8px;">HEADCOUNT TRAJECTORY</div>
+        <div style="font-size: 12px; line-height: 1.8;">
+          EOY 1: 10 (5 eng, 2 RA, 1 CSM, 1 AE, 1 ops)<br>
+          EOY 2: 22 (9 eng, 4 RA, 4 CSM, 3 sales, 2 ops)<br>
+          EOY 3: 42 (15 eng, 7 RA, 8 CSM, 8 sales, 4 ops)
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>19 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">90 sec</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Five founding seats including a Head of Regulatory who's either an ex-FDA OGD reviewer or an ex-VP of Regulatory at a generics company. That hire is non-negotiable — without domain credibility, our customers won't trust the output."
+      </div>
+      <div class="qa">
+        <div class="qa-l">EXPECT THIS QUESTION</div>
+        <div class="qa-q">"Have you identified the Head of Regulatory yet?"</div>
+        <div class="qa-a">[Be honest. If yes, name them. If no, say: "I've had three serious conversations — naming them at term sheet stage."]</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 20 — SENSITIVITY ANALYSIS ============= -->
+<div class="slide" data-name="Sensitivity analysis">
+  <div class="slide-accent"></div>
+  <div class="slide-inner">
+    <div class="slide-eyebrow">Slide 20</div>
+    <h2 class="slide-title">Sensitivity analysis</h2>
+    <div class="slide-subtitle">Three scenarios · what investors will pressure-test</div>
+    <div class="slide-divider"></div>
+    <div class="grid-3" style="margin-bottom: 16px;">
+      <div class="scenario-card">
+        <div class="scenario-head" style="background: var(--red);">
+          <div class="scenario-label">BEAR CASE</div>
+          <div class="scenario-name">Slow ramp</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row"><span class="l">Y3 customers</span><span class="v">14</span></div>
+          <div class="scenario-row"><span class="l">Y3 ARR</span><span class="v">$3.9M</span></div>
+          <div class="scenario-row"><span class="l">Y3 EBITDA</span><span class="v" style="color: var(--red);">($1.8M)</span></div>
+          <div class="scenario-row"><span class="l">Runway impact</span><span class="v" style="color: var(--red);">Bridge needed</span></div>
+        </div>
+        <div class="scenario-tag">Procurement cycles slip. Series A needs Y2 traction we don't have. Bridge round at flat valuation.</div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-head" style="background: var(--teal);">
+          <div class="scenario-label">BASE CASE</div>
+          <div class="scenario-name">On plan</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row"><span class="l">Y3 customers</span><span class="v">28</span></div>
+          <div class="scenario-row"><span class="l">Y3 ARR</span><span class="v">$9.5M</span></div>
+          <div class="scenario-row"><span class="l">Y3 EBITDA</span><span class="v" style="color: var(--green);">$1.6M</span></div>
+          <div class="scenario-row"><span class="l">Runway impact</span><span class="v">Series A clean</span></div>
+        </div>
+        <div class="scenario-tag">3 → 12 → 28 customer ramp. Patent Cert agent ships on Month 9. Standard regulated-software trajectory.</div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-head" style="background: var(--green);">
+          <div class="scenario-label">BULL CASE</div>
+          <div class="scenario-name">First-mover wins</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row"><span class="l">Y3 customers</span><span class="v">45</span></div>
+          <div class="scenario-row"><span class="l">Y3 ARR</span><span class="v">$18.2M</span></div>
+          <div class="scenario-row"><span class="l">Y3 EBITDA</span><span class="v" style="color: var(--green);">$5.4M</span></div>
+          <div class="scenario-row"><span class="l">Runway impact</span><span class="v" style="color: var(--green);">Series B priced 3x</span></div>
+        </div>
+        <div class="scenario-tag">First Para IV win lands a marquee logo. Inbound demand from EU/India generics. Pricing power.</div>
+      </div>
+    </div>
+    <div style="font-size: 12px; font-weight: 700; color: var(--navy); letter-spacing: 0.04em; margin-bottom: 8px;">KEY LEVERS — WHAT MOVES BETWEEN SCENARIOS</div>
+    <table class="data-table" style="margin-bottom: 14px;">
+      <tr>
+        <th style="width: 30%;">Lever</th>
+        <th class="num" style="width: 18%;">Bear</th>
+        <th class="num" style="width: 18%;">Base</th>
+        <th class="num" style="width: 18%;">Bull</th>
+        <th>Drives</th>
+      </tr>
+      <tr><td class="name">Sales cycle (pilot → paid)</td><td class="num" style="color: var(--red); font-weight: 600;">9 months</td><td class="num">5 months</td><td class="num" style="color: var(--green); font-weight: 600;">3 months</td><td>Y2 customer count</td></tr>
+      <tr><td class="name">Avg ANDAs / customer / year</td><td class="num" style="color: var(--red); font-weight: 600;">2</td><td class="num">4</td><td class="num" style="color: var(--green); font-weight: 600;">6</td><td>Revenue per logo</td></tr>
+      <tr><td class="name">Avg revenue per ANDA (Y3)</td><td class="num" style="color: var(--red); font-weight: 600;">$38K</td><td class="num">$55K</td><td class="num" style="color: var(--green); font-weight: 600;">$72K</td><td>Gross margin %</td></tr>
+      <tr><td class="name">Logo retention (Y2)</td><td class="num" style="color: var(--red); font-weight: 600;">65%</td><td class="num">85%</td><td class="num" style="color: var(--green); font-weight: 600;">95%</td><td>Net revenue retention</td></tr>
+      <tr><td class="name">Patent Cert ship date</td><td class="num" style="color: var(--red); font-weight: 600;">Month 14</td><td class="num">Month 9</td><td class="num" style="color: var(--green); font-weight: 600;">Month 7</td><td>Pricing power</td></tr>
+    </table>
+    <div class="what-kills">
+      <div class="what-kills-l">WHAT KILLS THE BASE CASE</div>
+      <div class="what-kills-b">
+        <strong>(1)</strong> Hiring ahead of revenue — most regtech failure mode &nbsp;
+        <strong>(2)</strong> Pursuing top-50 pharma instead of staying with sub-$500M generics &nbsp;
+        <strong>(3)</strong> One bad Para IV recommendation that triggers a customer lawsuit
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>Agentic AI for Small Generics Pharma</span><span>20 / 21</span></div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">90 sec — only if asked, or if pitch is going long</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Three scenarios. Bear case — sales cycles slip and we're at $3.9M ARR with a bridge needed. Base case — we hit our plan and Series A is clean. Bull case — first Para IV win lands a marquee logo and we're at $18M ARR. The killers of the base case are hiring ahead of revenue, chasing top-50 pharma, and one bad Para IV recommendation. We have controls for all three."
+      </div>
+      <div class="tip">This slide is a deep-dive option for sophisticated investors. Skip it if your pitch is going to time.</div>
+    </div>
+  </details>
+</div>
+
+<!-- ============= SLIDE 21 — CLOSING ============= -->
+<div class="slide" data-name="Three calls to make this week">
+  <div class="closing-slide">
+    <div class="closing-eyebrow">What to decide next</div>
+    <h2 class="closing-h">Three calls to make this week</h2>
+    <div class="closing-row">
+      <div class="closing-num">1</div>
+      <div>
+        <div class="closing-h2">Pick the wedge</div>
+        <div class="closing-body">Patent Certification (defensible) or Labeling Comparison (faster to ship)?<br><em>My recommendation: ship Labeling first; Patent Cert is the moat play.</em></div>
+      </div>
+    </div>
+    <div class="closing-row">
+      <div class="closing-num">2</div>
+      <div>
+        <div class="closing-h2">Pick the first 3 customers</div>
+        <div class="closing-body">One large mid-cap (Zydus/Lupin) for credibility, one mid (Avet/Cosette) for speed, one small (Aurolife/Ajanta) for case-study depth.</div>
+      </div>
+    </div>
+    <div class="closing-row">
+      <div class="closing-num">3</div>
+      <div>
+        <div class="closing-h2">Pick the partnership posture</div>
+        <div class="closing-body">Replacing the regulatory CRO, or augmenting in-house RA teams?<br><em>My recommendation: augment first. RA Directors who feel empowered will champion you.</em></div>
+      </div>
+    </div>
+    <div style="margin-top: 50px; font-size: 11px; color: rgba(255,255,255,0.5); border-top: 1px solid rgba(255,255,255,0.15); padding-top: 14px;">
+      Agentic AI for Small Generics Pharma · Strategy & Build Plan · May 2026
+    </div>
+  </div>
+  <details class="notes">
+    <summary>Speaker notes</summary>
+    <div class="notes-content">
+      <span class="timing">45 sec · close hard</span>
+      <div class="say">
+        <span class="say-label">SAY</span>
+        "Three calls I'm making this week. Pick the wedge — and I'm picking labeling first because it ships faster. Pick the first three customers — one large mid-cap for credibility, one mid for speed, one small for case-study depth. Pick the partnership posture — augment in-house teams first, replace CROs later. The next call is yours."
+      </div>
+      <div class="tip">End with a clear ask: "$3.5M for 24 months. We're closing a $1.5M lead and have $2M of allocation remaining. Decision by [date]." Specific, time-bound, easy to say yes to.</div>
+    </div>
+  </details>
+</div>
+
+</div>
+
+<!-- ============= FLOATING NAV ============= -->
+<div class="floating-nav">
+  <button onclick="navigate(-1)" aria-label="Previous slide">◂ Prev</button>
+  <span class="count" id="floating-count">1 / 21</span>
+  <button onclick="navigate(1)" aria-label="Next slide">Next ▸</button>
+</div>
+
+<script>
+  // Build the jump menu
+  (function() {
+    const select = document.getElementById('jump');
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach((s, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = `${i+1}. ${s.dataset.name}`;
+      select.appendChild(opt);
+    });
+    select.addEventListener('change', e => {
+      const idx = parseInt(e.target.value, 10);
+      if (!isNaN(idx)) {
+        slides[idx].scrollIntoView({behavior: 'smooth', block: 'start'});
+        select.value = '';
+      }
+    });
+  })();
+
+  // Floating nav: track which slide is in viewport
+  (function() {
+    const slides = document.querySelectorAll('.slide');
+    const counter = document.getElementById('floating-count');
+    const total = slides.length;
+
+    function getCurrentSlide() {
+      const scrollY = window.scrollY + window.innerHeight / 3;
+      for (let i = slides.length - 1; i >= 0; i--) {
+        if (slides[i].offsetTop <= scrollY) return i;
+      }
+      return 0;
+    }
+
+    function updateCount() {
+      const i = getCurrentSlide();
+      counter.textContent = `${i+1} / ${total}`;
+    }
+
+    window.addEventListener('scroll', updateCount, {passive: true});
+    updateCount();
+
+    window.navigate = function(dir) {
+      const current = getCurrentSlide();
+      const target = Math.max(0, Math.min(slides.length - 1, current + dir));
+      slides[target].scrollIntoView({behavior: 'smooth', block: 'start'});
+    };
+  })();
+
+  // Toggle all notes
+  function toggleAllNotes() {
+    const allNotes = document.querySelectorAll('details.notes');
+    const anyClosed = Array.from(allNotes).some(d => !d.open);
+    allNotes.forEach(d => d.open = anyClosed);
+  }
+
+  // Keyboard nav
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); navigate(1); }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); navigate(-1); }
+  });
+</script>
+
+</body>
+</html>

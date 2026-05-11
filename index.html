@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI for Generic Pharma — Complete Workspace</title>
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --navy-deep: #07162A;
+    --teal: #008C9E;
+    --orange: #E87A33;
+    --paper: #f5f1ea;
+    --accent: #b8451e;
+    --bg: #F5F7FA;
+    --surface: #FFFFFF;
+    --border: #E2E6EC;
+    --border-strong: #C8D0DA;
+    --text: #1A1A1A;
+    --text-muted: #4A5568;
+    --text-faint: #8B95A3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  .hub-header {
+    background: var(--navy);
+    color: white;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-bottom: 3px solid var(--orange);
+  }
+
+  .hub-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hub-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .hub-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .hub-meta {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  /* ===== TAB BAR ===== */
+  .tab-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 28px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .tab {
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 16px 22px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    margin-bottom: -1px;
+  }
+
+  .tab:hover {
+    color: var(--navy);
+    background: var(--bg);
+  }
+
+  .tab.active {
+    color: var(--navy);
+    border-bottom-color: var(--orange);
+    font-weight: 600;
+  }
+
+  .tab-num {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    background: var(--bg);
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  .tab.active .tab-num {
+    background: var(--orange);
+    color: white;
+  }
+
+  .tab-label-sub {
+    font-size: 10px;
+    color: var(--text-faint);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .tab.active .tab-label-sub {
+    color: var(--orange);
+  }
+
+  .tab-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .icon-btn {
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    letter-spacing: 0.03em;
+  }
+
+  .icon-btn:hover {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+  }
+
+  /* ===== FRAME CONTAINER ===== */
+  .frame-stage {
+    flex: 1;
+    position: relative;
+    background: var(--bg);
+    overflow: hidden;
+  }
+
+  .doc-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: var(--surface);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .doc-frame.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  /* loading state */
+  .loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--text-muted);
+    font-size: 13px;
+    z-index: 1;
+  }
+
+  .loader-spinner {
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--border);
+    border-top-color: var(--orange);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hub-header { padding: 12px 16px; }
+    .hub-meta { display: none; }
+    .tab-bar { padding: 0 12px; }
+    .tab { padding: 14px 14px 12px; font-size: 12px; }
+    .tab-label-sub { display: none; }
+    .tab-actions { display: none; }
+  }
+
+  /* ===== KEYBOARD HINT ===== */
+  .kbd-hint {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: rgba(11, 31, 58, 0.85);
+    color: rgba(255,255,255,0.7);
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    font-family: 'JetBrains Mono', ui-monospace, "SF Mono", Menlo, monospace;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+  }
+
+  .kbd-hint.visible {
+    opacity: 1;
+  }
+
+  .kbd-hint kbd {
+    background: rgba(255,255,255,0.15);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: inherit;
+    margin: 0 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===== HEADER ===== -->
+  <header class="hub-header">
+    <div class="hub-brand">
+      <div class="hub-title">Agentic AI for Small Generic Pharma</div>
+      <div class="hub-sub">Complete Workspace · Strategy + Brief + Final Thoughts</div>
+    </div>
+    <div class="hub-meta">NJ · 2026 · 3 Documents</div>
+  </header>
+
+  <!-- ===== TAB BAR ===== -->
+  <nav class="tab-bar" role="tablist">
+    <button class="tab active" data-doc="strategy" role="tab" aria-selected="true">
+      <span class="tab-num">01</span>
+      <span>
+        Strategy Deck
+        <div class="tab-label-sub">21 slides · build plan</div>
+      </span>
+    </button>
+    <button class="tab" data-doc="brief" role="tab" aria-selected="false">
+      <span class="tab-num">02</span>
+      <span>
+        Strategic Brief
+        <div class="tab-label-sub">11 sections · founder's guide</div>
+      </span>
+    </button>
+    <button class="tab" data-doc="thoughts" role="tab" aria-selected="false">
+      <span class="tab-num">03</span>
+      <span>
+        Final Thoughts
+        <div class="tab-label-sub">closing letter</div>
+      </span>
+    </button>
+    <div class="tab-actions">
+      <button class="icon-btn" id="openNew" title="Open current document in new tab">↗ Open in new tab</button>
+    </div>
+  </nav>
+
+  <!-- ===== FRAME STAGE ===== -->
+  <main class="frame-stage">
+    <div class="loader">
+      <div class="loader-spinner"></div>
+      <div>Loading document…</div>
+    </div>
+
+    <iframe
+      class="doc-frame active"
+      data-doc="strategy"
+      src="Agentic_AI_Generic_Pharma_Strategy.html"
+      title="Strategy Deck"
+      loading="eager">
+    </iframe>
+
+    <iframe
+      class="doc-frame"
+      data-doc="brief"
+      src="agentic_ai_generics_strategic_brief.html"
+      title="Strategic Brief"
+      loading="lazy">
+    </iframe>
+
+    <iframe
+      class="doc-frame"
+      data-doc="thoughts"
+      src="agentic_ai_generics_final_thoughts.html"
+      title="Final Thoughts"
+      loading="lazy">
+    </iframe>
+
+    <div class="kbd-hint" id="kbdHint">
+      <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> to switch · <kbd>←</kbd> <kbd>→</kbd> navigate
+    </div>
+  </main>
+
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const frames = document.querySelectorAll('.doc-frame');
+  const openNewBtn = document.getElementById('openNew');
+  const kbdHint = document.getElementById('kbdHint');
+
+  const docs = ['strategy', 'brief', 'thoughts'];
+  const docUrls = {
+    strategy: 'Agentic_AI_Generic_Pharma_Strategy.html',
+    brief: 'agentic_ai_generics_strategic_brief.html',
+    thoughts: 'agentic_ai_generics_final_thoughts.html'
+  };
+  let activeDoc = 'strategy';
+
+  function switchTo(docName) {
+    if (!docs.includes(docName)) return;
+    activeDoc = docName;
+
+    tabs.forEach(t => {
+      const isActive = t.dataset.doc === docName;
+      t.classList.toggle('active', isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    frames.forEach(f => {
+      f.classList.toggle('active', f.dataset.doc === docName);
+    });
+
+    // update URL hash without scroll
+    history.replaceState(null, '', `#${docName}`);
+  }
+
+  // tab clicks
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => switchTo(tab.dataset.doc));
+  });
+
+  // open in new tab
+  openNewBtn.addEventListener('click', () => {
+    window.open(docUrls[activeDoc], '_blank');
+  });
+
+  // keyboard nav
+  document.addEventListener('keydown', e => {
+    // ignore if focus is in iframe content (best-effort)
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    if (e.key === '1') switchTo('strategy');
+    else if (e.key === '2') switchTo('brief');
+    else if (e.key === '3') switchTo('thoughts');
+    else if (e.key === 'ArrowRight') {
+      const idx = docs.indexOf(activeDoc);
+      switchTo(docs[(idx + 1) % docs.length]);
+    } else if (e.key === 'ArrowLeft') {
+      const idx = docs.indexOf(activeDoc);
+      switchTo(docs[(idx - 1 + docs.length) % docs.length]);
+    }
+  });
+
+  // load from hash
+  if (window.location.hash) {
+    const hash = window.location.hash.slice(1);
+    if (docs.includes(hash)) switchTo(hash);
+  }
+
+  // show keyboard hint briefly on load, then on first interaction
+  setTimeout(() => kbdHint.classList.add('visible'), 800);
+  setTimeout(() => kbdHint.classList.remove('visible'), 4500);
+</script>
+
+</body>
+</html>
